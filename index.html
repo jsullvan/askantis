@@ -24,6 +24,13 @@
             overflow: hidden;
             background-attachment: fixed;
         }
+        @media (max-width: 767px) {
+            .hero-bg {
+                background-attachment: scroll;
+                background-size: cover;
+                background-position: center 25%;
+            }
+        }
         .hero-bg::before {
             content: '';
             position: absolute;
@@ -80,11 +87,22 @@
             <h1 class="text-2xl font-bold tracking-tighter text-white">
                 <a href="#">[askantis]</a>
             </h1>
-            <nav class="hidden md:flex space-x-8">
+            <nav id="nav-menu" class="hidden md:flex md:items-center space-x-8">
                 <a href="#offer" class="text-slate-300 hover:text-white transition-colors duration-300">Our Offer</a>
                 <a href="#testimonials" class="text-slate-300 hover:text-white transition-colors duration-300">Clients</a>
                 <a href="#about" class="text-slate-300 hover:text-white transition-colors duration-300">About Us</a>
             </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#offer" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Our Offer</a>
+            <a href="#testimonials" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Clients</a>
+            <a href="#about" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">About Us</a>
         </div>
     </header>
 
@@ -301,10 +319,21 @@
         // Initialize Feather Icons
         feather.replace();
 
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
     </script>
 </body>
 </html>
-
-
-
 
