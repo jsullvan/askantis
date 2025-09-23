@@ -15,31 +15,33 @@
             background-color: #0a0a0a;
             color: #e2e8f0;
         }
-        .hero-bg {
-            position: relative;
+        .site-background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
             background-image: url('hero-background.png');
             background-size: 70%;
             background-repeat: no-repeat;
             background-position: center center;
-            overflow: hidden;
-            background-attachment: fixed;
         }
         @media (max-width: 767px) {
-            .hero-bg {
-                background-attachment: scroll;
+            .site-background {
                 background-size: cover;
                 background-position: center 25%;
             }
         }
-        .hero-bg::before {
+        #home {
+            position: relative;
+        }
+        #home::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.4) 0%, #0a0a0a 100%);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.0) 0%, rgba(10, 10, 10, 0.8) 100%);
             z-index: 0;
+        }
+        .page-section {
+            background-color: rgba(10, 10, 10, 0.8);
         }
         .content-wrapper {
             position: relative;
@@ -81,6 +83,8 @@
 </head>
 <body class="antialiased">
 
+    <div class="site-background"></div>
+
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -108,7 +112,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="hero-bg h-screen flex items-center justify-center pt-20">
+        <section id="home" class="h-screen flex items-center justify-center pt-20">
             <div class="content-wrapper text-center px-4">
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tighter mb-6 leading-tight" data-aos="fade-up">
                     Value from <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-emerald-400">AI</span>
@@ -123,7 +127,7 @@
         </section>
 
         <!-- Our Offer Section -->
-        <section id="offer" class="py-24">
+        <section id="offer" class="py-24 page-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-white tracking-tighter" data-aos="fade-up">Our Offer</h2>
@@ -155,7 +159,7 @@
         </section>
 
         <!-- Trusted By Section -->
-        <section id="trusted-by" class="py-20 bg-black/50">
+        <section id="trusted-by" class="py-20 page-section">
             <div class="container mx-auto px-6 text-center" data-aos="fade-up">
                 <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Trusted By</h3>
                 <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8 items-center justify-center max-w-4xl mx-auto">
@@ -200,7 +204,7 @@
         </section>
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="py-24 bg-black/50">
+        <section id="testimonials" class="py-24 page-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-white tracking-tighter text-center mb-16" data-aos="fade-up">What Clients Say</h2>
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -234,7 +238,7 @@
 
 
         <!-- About Us Section -->
-        <section id="about" class="py-24 bg-black/50">
+        <section id="about" class="py-24 page-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
                     <h2 class="text-4xl font-bold text-white tracking-tighter">Who We Are</h2>
@@ -272,7 +276,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-24">
+        <section id="contact" class="py-24 page-section">
             <div class="container mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
                     <h2 class="text-4xl font-bold text-white tracking-tighter mb-6">Ready to transform your business with AI?</h2>
@@ -286,7 +290,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black/50 border-t border-slate-800">
+    <footer class="border-t border-slate-800 page-section">
         <div class="container mx-auto px-6 py-8 text-center text-slate-400">
             <p>&copy; <span id="year"></span> Askantis. All rights reserved.</p>
             <p class="text-sm mt-2">Delphinstrasse 12, 8008 Zürich</p>
@@ -336,5 +340,6 @@
     </script>
 </body>
 </html>
+
 
 
