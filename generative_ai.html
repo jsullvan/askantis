@@ -81,8 +81,11 @@
             margin: 0 auto;
         }
         .animated-gradient {
-            background-size: 200% auto;
-            animation: text-gradient 5s ease-in-out infinite;
+            /* NEW: Custom multi-color gradient for a richer animation */
+            background: linear-gradient(to right, #3b82f6, #6366f1, #a855f7, #ec4899, #f97316, #ec4899, #a855f7, #6366f1, #3b82f6);
+            background-size: 400% auto;
+            /* Animation speed adjusted for the new, wider gradient */
+            animation: text-gradient 12s ease-in-out infinite;
         }
         @keyframes text-gradient {
             0% {
@@ -148,11 +151,14 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="h-screen flex flex-col justify-center text-center pt-20">
-            <div class="content-wrapper px-4">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 animated-gradient" data-aos="fade-down">
+        <!-- UPDATED: Layout changed to position title at top, subtitle at bottom -->
+        <section id="home" class="h-screen flex flex-col justify-between pt-20">
+            <div class="content-wrapper text-center px-4 pt-16">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient" data-aos="fade-down">
                     Generative AI
                 </h1>
+            </div>
+            <div class="content-wrapper text-center px-4 pb-24">
                 <p class="max-w-3xl mx-auto text-lg text-slate-300" data-aos="fade-up" data-aos-delay="100">
                     We build custom Generative AI solutions that boost quality and productivity, giving you a decisive competitive edge in the new AI revolution.
                 </p>
@@ -399,4 +405,9 @@
     </script>
 </body>
 </html>
+
+
+
+
+
 
