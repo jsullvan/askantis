@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Askantis | Value from AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -44,6 +44,9 @@
         .page-section {
             background-color: rgba(10, 10, 10, 0.9); /* 10% transparent overlay */
         }
+        .page-section-light {
+            background-color: #f8fafc; /* Off-white */
+        }
         .content-wrapper {
             position: relative;
             z-index: 1;
@@ -67,10 +70,6 @@
                 opacity: 1;
             }
         }
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-        }
         .feature-icon {
             width: 64px;
             height: 64px;
@@ -82,16 +81,23 @@
         }
         /* Styling for client logos */
         .client-logo {
-            max-height: 48px; /* h-12 */
+            max-height: 56px; /* h-14 */
             width: auto;
             object-fit: contain;
-            filter: grayscale(1) brightness(0) invert(1); /* Makes logos white */
-            opacity: 0.7;
-            transition: all 0.3s ease-in-out;
+            transition: transform 0.2s ease-in-out;
         }
-        .client-logo:hover {
-            filter: none; /* Shows original colors on hover */
-            opacity: 1;
+        .client-logo-link:hover .client-logo {
+            transform: scale(1.05);
+        }
+        /* Gradient Transitions for Sections */
+        #trusted-by {
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, #f8fafc 8%, #f8fafc 100%);
+        }
+        #testimonials, #about {
+            background-color: #f8fafc;
+        }
+        #contact {
+            background: linear-gradient(to bottom, #f8fafc 0%, rgba(10, 10, 10, 0.95) 8%, rgba(10, 10, 10, 0.95) 100%);
         }
     </style>
 </head>
@@ -109,6 +115,7 @@
                 <a href="#offer" class="text-slate-300 hover:text-white transition-colors duration-300">Our Offer</a>
                 <a href="#testimonials" class="text-slate-300 hover:text-white transition-colors duration-300">Clients</a>
                 <a href="#about" class="text-slate-300 hover:text-white transition-colors duration-300">About Us</a>
+                <a href="#contact" class="text-slate-300 hover:text-white transition-colors duration-300">Contact Us</a>
             </nav>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-white focus:outline-none">
@@ -121,6 +128,7 @@
             <a href="#offer" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Our Offer</a>
             <a href="#testimonials" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Clients</a>
             <a href="#about" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">About Us</a>
+            <a href="#contact" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Contact Us</a>
         </div>
     </header>
 
@@ -175,78 +183,96 @@
         </section>
 
         <!-- Trusted By Section -->
-        <section id="trusted-by" class="py-20 page-section">
-            <div class="container mx-auto px-6 text-center" data-aos="fade-up">
-                <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Trusted By</h3>
+        <section id="trusted-by" class="py-20" data-aos="fade-up">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Trusted By</h3>
                 <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8 items-center justify-center max-w-4xl mx-auto">
                     <!-- SBB -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="100">
-                         <img src="https://cdn.worldvectorlogo.com/logos/sbb-cff-ffs.svg" alt="SBB CFF FFS Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="100">
+                         <a href="https://www.sbb.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/SBB_CFF_FFS_logo.png" alt="SBB CFF FFS Logo" class="client-logo">
+                         </a>
                     </div>
                     <!-- Helvetic -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="150">
-                        <img src="https://cdn.worldvectorlogo.com/logos/helvetic-airways-1.svg" alt="Helvetic Airways Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="150">
+                        <a href="https://www.helvetic.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/helvetic.png" alt="Helvetic Airways Logo" class="client-logo">
+                        </a>
                     </div>
                     <!-- Swiss Krono -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="200">
-                         <img src="https://cdn.worldvectorlogo.com/logos/swiss-krono-group.svg" alt="SWISS KRONO Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="200">
+                         <a href="https://www.swisskrono.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/swiss_krono.png" alt="SWISS KRONO Logo" class="client-logo">
+                         </a>
                     </div>
                     <!-- Pax -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="250">
-                         <img src="https://www.pax.ch/dam/jcr:1e5f8f5e-1463-42e1-a96c-b2dd9b5c30b2/Pax-Logo-quer-DE.svg" alt="Pax Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="250">
+                         <a href="https://www.pax.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/PAX_Schweizerische_Lebensversicherungs-Gesellschaft_Logo.avif" alt="Pax Logo" class="client-logo">
+                         </a>
                     </div>
                     <!-- Feldschlösschen -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="300">
-                        <img src="https://cdn.worldvectorlogo.com/logos/feldschlosschen-1.svg" alt="Feldschlösschen Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="300">
+                        <a href="https://www.feldschloesschen.swiss/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/feldschlosschen_corporate_rgb_pos.png" alt="Feldschlösschen Logo" class="client-logo">
+                        </a>
                     </div>
                     <!-- Garaiolabs -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="350">
-                        <img src="https://www.garaiolabs.com/_next/static/media/logo.201640a3.svg" alt="Garaiolabs Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="350">
+                        <a href="https://www.garaiolabs.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/garaio.avif" alt="Garaiolabs Logo" class="client-logo">
+                        </a>
                     </div>
                     <!-- stwt -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="400">
-                        <img src="https://www.stw-thueringen.de/fileadmin/user_upload/stw-thueringen.de/theme/images/logo.svg" alt="stwt Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="400">
+                        <a href="https://www.stw-thueringen.de/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/stwt.avif" alt="stwt Logo" class="client-logo">
+                        </a>
                     </div>
                     <!-- Nexus -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="450">
-                        <img src="https://nexus-vl.ch/wp-content/uploads/2022/10/logo_nexus.svg" alt="Nexus Personal Lounge Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="450">
+                        <a href="https://nexus-vl.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/nexus.avif" alt="Nexus Personal Lounge Logo" class="client-logo">
+                        </a>
                     </div>
                     <!-- Carhartt -->
-                    <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="500">
-                        <img src="https://cdn.worldvectorlogo.com/logos/carhartt.svg" alt="Carhartt Logo" class="client-logo">
+                    <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="500">
+                        <a href="https://www.carhartt.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
+                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/carhartt-wip-logo-vector%20(1)_edited.avif" alt="Carhartt Logo" class="client-logo">
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="py-24 page-section">
+        <section id="testimonials" class="py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-white tracking-tighter text-center mb-16" data-aos="fade-up">What Clients Say</h2>
+                <h2 class="text-4xl font-bold text-slate-900 tracking-tighter text-center mb-16" data-aos="fade-up">What Clients Say</h2>
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <div class="testimonial-card glass-card p-8 transition duration-300" data-aos="fade-up">
+                    <div class="bg-white shadow-xl rounded-2xl p-8 transition duration-300 hover:transform hover:-translate-y-2" data-aos="fade-up">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center p-1">
-                                <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/SBB.png" alt="SBB Logo" class="w-full h-full object-contain">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center p-1 border">
+                                <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/testimonials/SBB.png" alt="SBB Logo" class="w-full h-full object-contain">
                             </div>
                             <div class="ml-4">
-                                <h4 class="font-semibold text-white">Philipp Hartmann</h4>
-                                <p class="text-slate-400 text-sm">Leader Business Intelligence, SBB</p>
+                                <h4 class="font-semibold text-slate-900">Philipp Hartmann</h4>
+                                <p class="text-slate-500 text-sm">Leader Business Intelligence, SBB</p>
                             </div>
                         </div>
-                        <p class="text-slate-300">"At SBB, we are always seeking innovative solutions to enhance operational efficiency. Our collaboration with Askantis has been a transformative experience in leveraging AI for data analytics, particularly in financial reporting. Their technical expertise in AI and data science and commitment to client success are outstanding."</p>
+                        <p class="text-slate-600">"At SBB, we are always seeking innovative solutions to enhance operational efficiency. Our collaboration with Askantis has been a transformative experience in leveraging AI for data analytics, particularly in financial reporting. Their technical expertise in AI and data science and commitment to client success are outstanding."</p>
                     </div>
-                    <div class="testimonial-card glass-card p-8 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white shadow-xl rounded-2xl p-8 transition duration-300 hover:transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center p-1">
-                                <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/Krono.png" alt="SWISS KRONO Logo" class="w-full h-full object-contain">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center p-1 border">
+                                <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/testimonials/Krono.png" alt="SWISS KRONO Logo" class="w-full h-full object-contain">
                             </div>
                             <div class="ml-4">
-                                <h4 class="font-semibold text-white">Patrick Wisniewski</h4>
-                                <p class="text-slate-400 text-sm">Project Manager CSMO, SWISS KRONO Group</p>
+                                <h4 class="font-semibold text-slate-900">Patrick Wisniewski</h4>
+                                <p class="text-slate-500 text-sm">Project Manager CSMO, SWISS KRONO Group</p>
                             </div>
                         </div>
-                        <p class="text-slate-300">"Working with Askantis to develop a forecasting model for our products was a great success. Thanks to their expertise in predictive analytics, we now have a quantitative model in our toolkit that significantly enhances our strategic planning."</p>
+                        <p class="text-slate-600">"Working with Askantis to develop a forecasting model for our products was a great success. Thanks to their expertise in predictive analytics, we now have a quantitative model in our toolkit that significantly enhances our strategic planning."</p>
                     </div>
                 </div>
             </div>
@@ -254,45 +280,45 @@
 
 
         <!-- About Us Section -->
-        <section id="about" class="py-24 page-section">
+        <section id="about" class="py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
-                    <h2 class="text-4xl font-bold text-white tracking-tighter">Who We Are</h2>
-                    <p class="mt-4 text-lg text-slate-400">Askantis was founded in 2023 by three ETH Zurich alumni. Our team consists of mathematicians, physicists, data scientists, software engineers and machine learning experts.</p>
+                    <h2 class="text-4xl font-bold text-slate-900 tracking-tighter">Who We Are</h2>
+                    <p class="mt-4 text-lg text-slate-600">Askantis was founded in 2023 by three ETH Zurich alumni. Our team consists of mathematicians, physicists, data scientists, software engineers and machine learning experts.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="text-center" data-aos="fade-up" data-aos-delay="100">
                         <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/oliver_k.avif" alt="Oliver Knapp">
-                        <h4 class="text-xl font-semibold text-white">Oliver Knapp</h4>
-                        <p class="text-sky-400">Co-Founder & Managing Director</p>
+                        <h4 class="text-xl font-semibold text-slate-900">Oliver Knapp</h4>
+                        <p class="text-sky-600">Co-Founder & Managing Director</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                         <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/felix_s.avif" alt="Felix Schur">
-                        <h4 class="text-xl font-semibold text-white">Felix Schur</h4>
-                        <p class="text-sky-400">Co-Founder & Causal Inference Specialist</p>
+                        <h4 class="text-xl font-semibold text-slate-900">Felix Schur</h4>
+                        <p class="text-sky-600">Co-Founder & Causal Inference Specialist</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="300">
                         <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/coline_b.avif" alt="Coline Bretz">
-                        <h4 class="text-xl font-semibold text-white">Coline Bretz</h4>
-                        <p class="text-sky-400">Business Development Lead</p>
+                        <h4 class="text-xl font-semibold text-slate-900">Coline Bretz</h4>
+                        <p class="text-sky-600">Business Development Lead</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="400">
                         <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/james_o.avif" alt="James O'Sullivan">
-                        <h4 class="text-xl font-semibold text-white">James O'Sullivan</h4>
-                        <p class="text-sky-400">Senior Technical Consultant</p>
+                        <h4 class="text-xl font-semibold text-slate-900">James O'Sullivan</h4>
+                        <p class="text-sky-600">Senior Technical Consultant</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="500">
                         <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/mikel_p.avif" alt="Mikel Prandini">
-                        <h4 class="text-xl font-semibold text-white">Mikel Prandini</h4>
-                        <p class="text-sky-400">Software Engineer</p>
+                        <h4 class="text-xl font-semibold text-slate-900">Mikel Prandini</h4>
+                        <p class="text-sky-600">Software Engineer</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-24 page-section">
+        <section id="contact" class="py-24">
             <div class="container mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
                     <h2 class="text-4xl font-bold text-white tracking-tighter mb-6">Ready to transform your business with AI?</h2>
@@ -308,6 +334,17 @@
     <!-- Footer -->
     <footer class="border-t border-slate-800 page-section">
         <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <div class="mb-8">
+                <h4 class="text-sm uppercase font-semibold tracking-wider text-slate-500 mb-4">Site Map</h4>
+                <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors">Home</a>
+                    <a href="#offer" class="text-slate-400 hover:text-white transition-colors">Our Offer</a>
+                    <a href="#trusted-by" class="text-slate-400 hover:text-white transition-colors">Clients</a>
+                    <a href="#testimonials" class="text-slate-400 hover:text-white transition-colors">Testimonials</a>
+                    <a href="#about" class="text-slate-400 hover:text-white transition-colors">About Us</a>
+                    <a href="#contact" class="text-slate-400 hover:text-white transition-colors">Contact</a>
+                </nav>
+            </div>
             <p>&copy; <span id="year"></span> Askantis. All rights reserved.</p>
             <p class="text-sm mt-2">Delphinstrasse 12, 8008 Zürich</p>
         </div>
@@ -354,5 +391,4 @@
     </script>
 </body>
 </html>
-
 
