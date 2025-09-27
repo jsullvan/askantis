@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generative AI | Askantis</title>
-    <!-- FIX: Using consistent, official Tailwind CDN -->
+    <!-- Using consistent, official Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,16 +20,16 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
-            background-image: radial-gradient(circle at center, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
-            background-size: 150% 150%;
+            background-image: url("images/hero-background.png");
+            background-size: 70%;
             background-repeat: no-repeat;
             background-position: center center;
-            animation: pulse-bg 10s infinite ease-in-out;
         }
-        @keyframes pulse-bg {
-            0% { background-position: center center; }
-            50% { background-position: top left; }
-            100% { background-position: center center; }
+        @media (max-width: 767px) {
+            .site-background {
+                background-size: cover;
+                background-position: center 25%;
+            }
         }
         #home {
             position: relative;
@@ -67,7 +67,7 @@
                 opacity: 1;
             }
         }
-        .testimonial-card:hover {
+        .testimonial-card:hover, .faq-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
         }
@@ -95,9 +95,22 @@
                 background-position: 0% 50%;
             }
         }
+        /* Styling for the FAQ accordion */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+        details[open] .faq-arrow {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden">
+<body class="antialiased">
 
     <div class="site-background"></div>
 
@@ -112,10 +125,12 @@
                 <a href="#services" class="text-slate-300 hover:text-white transition-colors duration-300">Services</a>
                 <a href="#approach" class="text-slate-300 hover:text-white transition-colors duration-300">Approach</a>
                 <a href="#casestudies" class="text-slate-300 hover:text-white transition-colors duration-300">Case Studies</a>
+                <!-- ADDED: FAQ link -->
+                <a href="#faq" class="text-slate-300 hover:text-white transition-colors duration-300">FAQ</a>
                 <a href="#contact" class="text-slate-300 hover:text-white transition-colors duration-300">Contact</a>
             </nav>
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                <button id="mobile-menu-button" class="text-white focus:outline-none" aria-label="Open navigation menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
@@ -125,6 +140,8 @@
             <a href="#services" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Services</a>
             <a href="#approach" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Approach</a>
             <a href="#casestudies" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Case Studies</a>
+            <!-- ADDED: FAQ link -->
+            <a href="#faq" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">FAQ</a>
             <a href="#contact" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Contact</a>
         </div>
     </header>
@@ -276,6 +293,42 @@
             </div>
         </section>
 
+        <!-- NEW: FAQ Section -->
+        <section id="faq" class="py-24 page-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-white tracking-tighter text-center mb-16" data-aos="fade-up">Frequently Asked Questions</h2>
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <details class="faq-item glass-card p-6 transition duration-300" data-aos="fade-up">
+                        <summary class="flex justify-between items-center font-semibold text-white text-lg cursor-pointer">
+                            How do you ensure data privacy and security?
+                            <i data-feather="chevron-down" class="faq-arrow"></i>
+                        </summary>
+                        <p class="text-slate-300 mt-4">
+                            We prioritize data security above all else. Our solutions can be deployed on-premise or in your private cloud, ensuring you retain full control over your data. We adhere to strict data protection protocols and can comply with industry-specific regulations like GDPR and HIPAA.
+                        </p>
+                    </details>
+                    <details class="faq-item glass-card p-6 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <summary class="flex justify-between items-center font-semibold text-white text-lg cursor-pointer">
+                            What kind of ROI can we expect?
+                            <i data-feather="chevron-down" class="faq-arrow"></i>
+                        </summary>
+                        <p class="text-slate-300 mt-4">
+                            Return on investment varies by project but is typically measured in productivity gains, cost savings, and quality improvements. For example, automating report generation can save hundreds of hours annually, while AI-powered customer support can reduce overhead and improve customer satisfaction. We work with you to define and track key metrics from the start.
+                        </p>
+                    </details>
+                    <details class="faq-item glass-card p-6 transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <summary class="flex justify-between items-center font-semibold text-white text-lg cursor-pointer">
+                            How long does a typical project take?
+                            <i data-feather="chevron-down" class="faq-arrow"></i>
+                        </summary>
+                        <p class="text-slate-300 mt-4">
+                            Our "Proof of Value" phase is designed to be quick, typically taking 2-4 weeks. This allows us to demonstrate tangible results with a functional prototype. A full-scale integration and deployment can range from 2 to 6 months, depending on the complexity and your existing infrastructure.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="py-24 page-section">
             <div class="container mx-auto px-6">
@@ -283,7 +336,7 @@
                     <h2 class="text-4xl font-bold text-white tracking-tighter mb-6">Ready to transform your business with AI?</h2>
                     <p class="text-xl text-slate-400 mb-10" data-aos="fade-up" data-aos-delay="100">Get in touch with our team to discuss how we can help.</p>
                     <div data-aos="fade-up" data-aos-delay="200">
-                        <!-- FIX: Unified contact email -->
+                        <!-- Unified contact email -->
                         <a href="mailto:contact@askantis.ch" class="inline-block px-10 py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-200 transition duration-300 text-lg">Contact Us</a>
                     </div>
                 </div>
@@ -295,13 +348,13 @@
     <footer class="border-t border-slate-800 page-section">
         <div class="container mx-auto px-6 py-8 text-center text-slate-400">
             <p>&copy; <span id="year"></span> Askantis. All rights reserved.</p>
-             <!-- FIX: Unified contact email -->
+             <!-- Unified contact email -->
             <p class="text-sm mt-2">contact@askantis.ch</p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- FIX: Added missing Feather Icons script -->
+    <!-- Added missing Feather Icons script -->
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
         // Set current year in footer
@@ -311,9 +364,12 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
