@@ -38,3 +38,4 @@ images/Homepage[[:space:]]Image[[:space:]]Askantis.png filter=lfs diff=lfs merge
 hero-background.png filter=lfs diff=lfs merge=lfs -text
 JamesOSullivan.jpg filter=lfs diff=lfs merge=lfs -text
 images/brain_neural_network.png filter=lfs diff=lfs merge=lfs -text
+images/hero-background.png filter=lfs diff=lfs merge=lfs -text
