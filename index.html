@@ -38,7 +38,7 @@
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             /* Fades from light overlay to dark overlay at the bottom */
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0) 70%, rgba(10, 10, 10, 0.95) 100%);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 70%, rgba(10, 10, 10, 0.95) 100%);
             z-index: 0;
         }
         .page-section {
@@ -118,25 +118,6 @@
         #offer, #contact {
              padding-bottom: 80px; /* Make space for wave */
         }
-        
-        /* Animated Gradient for Hero Title */
-        .animated-gradient {
-            background: linear-gradient(to right, #3b82f6, #6366f1, #a855f7, #ec4899, #f97316, #ec4899, #a855f7, #6366f1, #3b82f6);
-            background-size: 400% auto;
-            animation: text-gradient 12s ease-in-out infinite;
-        }
-
-        @keyframes text-gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
     </style>
 </head>
 <body class="antialiased">
@@ -174,7 +155,7 @@
         <!-- Hero Section -->
         <section id="home" class="h-screen flex flex-col justify-between pt-20">
             <div class="content-wrapper text-center px-4 pt-4">
-                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient" data-aos="fade-down">
+                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight text-white" data-aos="fade-down">
                     [askantis]
                 </h1>
             </div>
