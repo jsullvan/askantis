@@ -19,7 +19,8 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
-            background-image: url('hero-background.png');
+            /* Using a high-resolution background image from the official site */
+            background-image: url('https://www.askantis.ch/_next/image?url=%2Fhero-background.png&w=3840&q=75');
             background-size: 70%;
             background-repeat: no-repeat;
             background-position: center center;
@@ -79,6 +80,19 @@
             justify-content: center;
             border-radius: 50%;
             margin: 0 auto;
+        }
+        /* Styling for client logos */
+        .client-logo {
+            max-height: 48px; /* h-12 */
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(1) brightness(0) invert(1); /* Makes logos white */
+            opacity: 0.7;
+            transition: all 0.3s ease-in-out;
+        }
+        .client-logo:hover {
+            filter: none; /* Shows original colors on hover */
+            opacity: 1;
         }
     </style>
 </head>
@@ -143,14 +157,14 @@
                         <h3 class="text-xl font-bold text-white mb-3">Generative AI</h3>
                         <p class="text-slate-400">Custom solutions to enhance creativity and automate content generation</p>
                     </a>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
                             <i data-feather="trending-up" class="w-8 h-8"></i>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">Productivity</h3>
                         <p class="text-slate-400">Boost efficiency through intelligent automation and process optimization</p>
                     </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
                             <i data-feather="eye" class="w-8 h-8"></i>
                         </div>
@@ -168,39 +182,39 @@
                 <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8 items-center justify-center max-w-4xl mx-auto">
                     <!-- SBB -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="100">
-                         <p class="text-2xl font-bold text-slate-200 tracking-wider">SBB CFF FFS</p>
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/SBB_CFF_FFS_logo.svg/2560px-SBB_CFF_FFS_logo.svg.png" alt="SBB CFF FFS Logo" class="client-logo">
                     </div>
                     <!-- Helvetic -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="150">
-                        <p class="text-3xl font-light text-slate-200 italic">helvetic<span class="font-bold text-red-500">></span></p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Helvetic_Airways_logo.svg/1200px-Helvetic_Airways_logo.svg.png" alt="Helvetic Airways Logo" class="client-logo">
                     </div>
                     <!-- Swiss Krono -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="200">
-                         <p class="text-2xl font-bold text-slate-200 tracking-wider">SWISS KRONO</p>
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Swiss_Krono_Group_logo.svg/2560px-Swiss_Krono_Group_logo.svg.png" alt="SWISS KRONO Logo" class="client-logo">
                     </div>
                     <!-- Pax -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="250">
-                         <p class="text-4xl font-extrabold text-lime-400">.Pax</p>
+                         <img src="https://www.pax.ch/dam/jcr:1e5f8f5e-1463-42e1-a96c-b2dd9b5c30b2/Pax-Logo-quer-DE.svg" alt="Pax Logo" class="client-logo">
                     </div>
                     <!-- Feldschlösschen -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="300">
-                        <p class="text-xl font-serif font-bold text-blue-300">FELDSCHLÖSSCHEN</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Feldschl%C3%B6sschen_logo.svg/1280px-Feldschl%C3%B6sschen_logo.svg.png" alt="Feldschlösschen Logo" class="client-logo">
                     </div>
                     <!-- Garaiolabs -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="350">
-                        <p class="text-xl font-semibold text-cyan-400">GARAIOLABS</p>
+                        <img src="https://www.garaiolabs.com/_next/static/media/logo.201640a3.svg" alt="Garaiolabs Logo" class="client-logo">
                     </div>
                     <!-- stwt -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="400">
-                        <p class="text-3xl font-light text-green-300">stwt<span class="text-green-500">.</span></p>
+                        <img src="https://www.stw-thueringen.de/fileadmin/user_upload/stw-thueringen.de/theme/images/logo.svg" alt="stwt Logo" class="client-logo">
                     </div>
                     <!-- Nexus -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="450">
-                        <p class="text-4xl font-bold text-red-500">Nexus</p>
+                        <img src="https://nexus-vl.ch/wp-content/uploads/2022/10/logo_nexus.svg" alt="Nexus Personal Lounge Logo" class="client-logo">
                     </div>
                     <!-- Carhartt -->
                     <div class="flex justify-center h-12" data-aos="fade-up" data-aos-delay="500">
-                        <p class="text-2xl font-bold text-amber-500">carhartt</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Carhartt_logo.svg/1280px-Carhartt_logo.svg.png" alt="Carhartt Logo" class="client-logo">
                     </div>
                 </div>
             </div>
@@ -250,27 +264,27 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://placehold.co/200x200/1e293b/e2e8f0?text=OK" alt="Oliver Knapp">
+                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://www.askantis.ch/_next/image?url=%2Fteam%2Foliver_knapp.jpeg&w=3840&q=75" alt="Oliver Knapp">
                         <h4 class="text-xl font-semibold text-white">Oliver Knapp</h4>
                         <p class="text-sky-400">Co-Founder & Managing Director</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://placehold.co/200x200/1e293b/e2e8f0?text=FS" alt="Felix Schur">
+                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://www.askantis.ch/_next/image?url=%2Fteam%2Ffelix_schur.jpeg&w=3840&q=75" alt="Felix Schur">
                         <h4 class="text-xl font-semibold text-white">Felix Schur</h4>
                         <p class="text-sky-400">Co-Founder & Causal Inference Specialist</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://placehold.co/200x200/1e293b/e2e8f0?text=CB" alt="Coline Bretz">
+                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://www.askantis.ch/_next/image?url=%2Fteam%2Fcoline_bretz.jpeg&w=3840&q=75" alt="Coline Bretz">
                         <h4 class="text-xl font-semibold text-white">Coline Bretz</h4>
                         <p class="text-sky-400">Business Development Lead</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="400">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="JamesOSullivan.jpg" alt="James O'Sullivan">
+                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://www.askantis.ch/_next/image?url=%2Fteam%2Fjames_osullivan.jpeg&w=3840&q=75" alt="James O'Sullivan">
                         <h4 class="text-xl font-semibold text-white">James O'Sullivan</h4>
                         <p class="text-sky-400">Senior Technical Consultant</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="500">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://placehold.co/200x200/1e293b/e2e8f0?text=MP" alt="Mikel Prandini">
+                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-gray-800" src="https://www.askantis.ch/_next/image?url=%2Fteam%2Fmikel_prandini.jpeg&w=3840&q=75" alt="Mikel Prandini">
                         <h4 class="text-xl font-semibold text-white">Mikel Prandini</h4>
                         <p class="text-sky-400">Software Engineer</p>
                     </div>
@@ -310,6 +324,11 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -333,14 +352,6 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
     </script>
 </body>
 </html>
-
