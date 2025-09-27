@@ -24,6 +24,8 @@
             background-size: 70%;
             background-repeat: no-repeat;
             background-position: center center;
+            /* ADDED: Faded the background image to 10% opacity */
+            opacity: 0.1;
         }
         @media (max-width: 767px) {
             .site-background {
@@ -151,14 +153,12 @@
 
     <main>
         <!-- Hero Section -->
-        <!-- UPDATED: Layout changed to position title at top, subtitle at bottom -->
-        <section id="home" class="h-screen flex flex-col justify-between pt-20">
-            <div class="content-wrapper text-center px-4 pt-16">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient" data-aos="fade-down">
+        <!-- UPDATED: Centered title and subtitle vertically -->
+        <section id="home" class="h-screen flex flex-col justify-center text-center pt-20">
+            <div class="content-wrapper px-4">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient mb-6" data-aos="fade-down">
                     Generative AI
                 </h1>
-            </div>
-            <div class="content-wrapper text-center px-4 pb-24">
                 <p class="max-w-3xl mx-auto text-lg text-slate-300" data-aos="fade-up" data-aos-delay="100">
                     We build custom Generative AI solutions that boost quality and productivity, giving you a decisive competitive edge in the new AI revolution.
                 </p>
@@ -405,6 +405,7 @@
     </script>
 </body>
 </html>
+
 
 
 
