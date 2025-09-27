@@ -150,12 +150,12 @@
                 <a href="#">[askantis]</a>
             </h1>
             <nav id="nav-menu" class="hidden md:flex md:items-center space-x-8">
-                <div class="relative group">
-                    <button class="flex items-center text-slate-300 hover:text-white transition-colors duration-300">
+                <div class="relative">
+                    <button id="desktop-offer-button" class="flex items-center text-slate-300 hover:text-white transition-colors duration-300">
                         Our Offer
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg id="desktop-offer-arrow" class="w-4 h-4 ml-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-gray-900/80 backdrop-blur-md rounded-lg shadow-lg hidden group-hover:block z-50">
+                    <div id="desktop-offer-submenu" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-gray-900/80 backdrop-blur-md rounded-lg shadow-lg hidden z-50">
                         <a href="generative_ai.html" class="block px-4 py-2 text-slate-300 hover:bg-gray-800 hover:text-white rounded-t-lg">Generative AI</a>
                         <a href="#" class="block px-4 py-2 text-slate-300 hover:bg-gray-800 hover:text-white rounded-b-lg">Insights</a>
                     </div>
@@ -439,6 +439,19 @@
         // Initialize Feather Icons
         feather.replace();
 
+        // --- Dropdown Menu Logic ---
+
+        // Desktop Menu
+        const desktopOfferButton = document.getElementById('desktop-offer-button');
+        const desktopOfferSubmenu = document.getElementById('desktop-offer-submenu');
+        const desktopOfferArrow = document.getElementById('desktop-offer-arrow');
+
+        desktopOfferButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent the window click listener from firing immediately
+            desktopOfferSubmenu.classList.toggle('hidden');
+            desktopOfferArrow.classList.toggle('rotate-180');
+        });
+
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -455,6 +468,14 @@
             e.stopPropagation();
             mobileOfferSubmenu.classList.toggle('hidden');
             mobileOfferArrow.classList.toggle('rotate-180');
+        });
+
+        // Close desktop dropdown when clicking anywhere else
+        window.addEventListener('click', (e) => {
+            if (!desktopOfferButton.contains(e.target)) {
+                desktopOfferSubmenu.classList.add('hidden');
+                desktopOfferArrow.classList.remove('rotate-180');
+            }
         });
 
     </script>
