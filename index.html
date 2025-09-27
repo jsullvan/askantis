@@ -118,6 +118,25 @@
         #offer, #contact {
              padding-bottom: 80px; /* Make space for wave */
         }
+        
+        /* Animated Gradient for Hero Title */
+        .animated-gradient {
+            background: linear-gradient(to right, #3b82f6, #6366f1, #a855f7, #ec4899, #f97316, #ec4899, #a855f7, #6366f1, #3b82f6);
+            background-size: 400% auto;
+            animation: text-gradient 12s ease-in-out infinite;
+        }
+
+        @keyframes text-gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -155,13 +174,13 @@
         <!-- Hero Section -->
         <section id="home" class="h-screen flex flex-col justify-between pt-20">
             <div class="content-wrapper text-center px-4 pt-16">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tighter mb-6 leading-tight" data-aos="fade-down">
-                    Value from <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-emerald-400">AI</span>
+                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient" data-aos="fade-down">
+                    Askantis
                 </h1>
             </div>
             <div class="content-wrapper text-center px-4 pb-24">
                 <p class="max-w-2xl mx-auto text-lg text-white font-bold" data-aos="fade-up" data-aos-delay="100">
-                    We apply our expertise in Generative AI and Machine Learning to build tailored applications aimed at increasing both the quality and productivity of businesses.
+                    Harnessing AI to build custom solutions that optimise business quality and productivity
                 </p>
             </div>
             <a href="#offer" class="scroll-down-arrow absolute bottom-12 left-1/2 -translate-x-1/2 z-10" aria-label="Scroll down">
