@@ -117,8 +117,8 @@
 <body class="antialiased">
 
     <div class="site-background">
-        <!-- The background video that will loop back and forth -->
-        <video id="hero-video" autoplay muted playsinline>
+        <!-- The background video now loops normally -->
+        <video id="hero-video" loop autoplay muted playsinline>
             <source src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/hero-background.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -420,54 +420,8 @@
         // Initialize Feather Icons
         feather.replace();
         
-        // --- FIXED: Custom script for yo-yo video loop ---
-        const heroVideo = document.getElementById('hero-video');
-        if (heroVideo) {
-            let isGoingForward = true;
-            let reverseInterval = null; // To hold our interval ID
-
-            // Function to handle the reversing effect
-            const startReversing = () => {
-                if (reverseInterval) clearInterval(reverseInterval); // Clear existing interval
-                
-                reverseInterval = setInterval(() => {
-                    // Manually scrub the video backwards
-                    heroVideo.currentTime -= 0.033;
-
-                    // Check if we've reached the beginning
-                    if (heroVideo.currentTime <= 0) {
-                        clearInterval(reverseInterval);
-                        reverseInterval = null;
-                        isGoingForward = true;
-                        heroVideo.playbackRate = 1.0; // Reset playback rate
-                        heroVideo.play(); // Play forward again
-                    }
-                }, 33); // Run ~30 times per second for smooth reversing
-            };
-
-            const setupVideoLoop = () => {
-                heroVideo.addEventListener('timeupdate', function() {
-                    const buffer = 0.1; // Buffer to trigger reversal before the absolute end
-                    
-                    // When playing forward and near the end, start reversing
-                    if (isGoingForward && this.currentTime >= this.duration - buffer) {
-                        isGoingForward = false;
-                        this.pause();
-                        startReversing();
-                    }
-                });
-            };
-
-            // Wait for video metadata to be loaded before setting up the loop
-            if (heroVideo.readyState >= 1) { // readyState >= 1 means metadata is loaded
-                setupVideoLoop();
-            } else {
-                heroVideo.addEventListener('loadedmetadata', setupVideoLoop);
-            }
-            
-            // Fallback to ensure video plays
-            heroVideo.play().catch(e => console.error("Video autoplay was prevented by browser.", e));
-        }
+        // The complex video script is no longer needed.
+        // The `loop` attribute on the <video> tag handles everything.
 
 
         // --- Dropdown Menu Logic ---
