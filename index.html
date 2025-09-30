@@ -19,16 +19,18 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
-            background-image: url("images/hero-background.png");
-            background-size: 70%;
-            background-repeat: no-repeat;
-            background-position: center center;
+            overflow: hidden; /* Ensures video doesn't spill out */
         }
-        @media (max-width: 767px) {
-            .site-background {
-                background-size: cover;
-                background-position: center 25%;
-            }
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover; /* This makes the video cover the area, cropping as needed */
         }
         #home {
             position: relative;
@@ -141,7 +143,13 @@
 </head>
 <body class="antialiased">
 
-    <div class="site-background"></div>
+    <div class="site-background">
+        <!-- The background image has been replaced with this video -->
+        <video id="hero-video" autoplay muted playsinline>
+            <source src="images/hero-background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
@@ -239,7 +247,7 @@
                     <!-- SBB -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="100">
                          <a href="https://www.sbb.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
-                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/SBB_CFF_FFS_logo.png" alt="SBB CFF FFS Logo" class="client-logo">
+                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/SBB_CFF_FFS_logo.png" alt="SBB CFF FFS Logo" class="client-logo">
                          </a>
                     </div>
                     <!-- Helvetic -->
@@ -251,13 +259,13 @@
                     <!-- Swiss Krono -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="200">
                          <a href="https://www.swisskrono.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
-                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/swiss_krono.png" alt="SWISS KRONO Logo" class="client-logo">
+                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/swiss_krono.png" alt="SWISS KRONO Logo" class="client-logo">
                          </a>
                     </div>
                     <!-- Pax -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="250">
                          <a href="https://www.pax.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
-                            <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/PAX_Schweizerische_Lebensversicherungs-Gesellschaft_Logo.avif" alt="Pax Logo" class="client-logo">
+                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/PAX_Schweizerische_Lebensversicherungs-Gesellschaft_Logo.avif" alt="Pax Logo" class="client-logo">
                          </a>
                     </div>
                     <!-- Feldschlösschen -->
@@ -438,6 +446,27 @@
 
         // Initialize Feather Icons
         feather.replace();
+        
+        // --- Custom script for yo-yo video loop ---
+        const heroVideo = document.getElementById('hero-video');
+        if (heroVideo) {
+            heroVideo.addEventListener('ended', function() {
+                // This event fires when the video reaches the end playing forwards.
+                // We then set the playback rate to negative to play it backwards.
+                this.playbackRate = -1;
+                this.play();
+            });
+
+            heroVideo.addEventListener('timeupdate', function() {
+                // The 'ended' event doesn't fire when reaching the start while playing backwards.
+                // So, we check the timeupdate event to see if we're near the beginning.
+                if (this.playbackRate < 0 && this.currentTime <= 0.05) {
+                    this.playbackRate = 1;
+                    this.play();
+                }
+            });
+        }
+
 
         // --- Dropdown Menu Logic ---
 
@@ -481,4 +510,5 @@
     </script>
 </body>
 </html>
+
 
