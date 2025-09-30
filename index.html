@@ -25,20 +25,14 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            /* Mobile-first: prioritize fitting the width to avoid side cropping on phones */
+            /* This single ruleset ensures the video covers the screen on all devices */
             width: 100%;
-            height: auto;
+            height: 100%;
             transform: translateX(-50%) translateY(-50%);
-            object-fit: cover; /* This makes the video cover the area, cropping as needed */
+            object-fit: cover; /* This is the key: it scales the video to fill the space without distortion */
         }
 
-        /* For larger screens (landscape), prioritize fitting the height */
-        @media (min-width: 769px) {
-            #hero-video {
-                width: auto;
-                height: 100%;
-            }
-        }
+        /* The old media query is no longer needed with this improved approach */
         
         #home {
             position: relative;
@@ -474,6 +468,7 @@
     </script>
 </body>
 </html>
+
 
 
 
