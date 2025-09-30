@@ -26,7 +26,10 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 10, 10, 0.8) 100%);
+            backdrop-filter: blur(24px); /* This adds the blur effect */
+            /* This mask creates the vignette effect for the blur */
+            -webkit-mask-image: radial-gradient(ellipse at center, transparent 40%, black 100%);
+            mask-image: radial-gradient(ellipse at center, transparent 40%, black 100%);
         }
         
         /* Default (mobile) styling for the video */
@@ -39,7 +42,7 @@
             width: auto;
             height: auto;
             /* Larger scale for mobile screens */
-            transform: translateX(-50%) translateY(-50%) scale(0.9);
+            transform: translateX(-50%) translateY(-50%) scale(1.1);
             object-fit: contain;
         }
 
@@ -466,3 +469,7 @@
     </script>
 </body>
 </html>
+
+
+
+
