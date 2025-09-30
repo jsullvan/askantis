@@ -423,21 +423,25 @@
         // --- Custom script for yo-yo video loop ---
         const heroVideo = document.getElementById('hero-video');
         if (heroVideo) {
-            heroVideo.addEventListener('ended', function() {
-                // This event fires when the video reaches the end playing forwards.
-                // We then set the playback rate to negative to play it backwards.
-                this.playbackRate = -1;
-                this.play();
-            });
-
+            let isGoingForward = true;
             heroVideo.addEventListener('timeupdate', function() {
-                // The 'ended' event doesn't fire when reaching the start while playing backwards.
-                // So, we check the timeupdate event to see if we're near the beginning.
-                if (this.playbackRate < 0 && this.currentTime <= 0.05) {
-                    this.playbackRate = 1;
+                // A small buffer to prevent getting stuck at the very end or start
+                const buffer = 0.2; 
+                // Check if playing forward and near the end
+                if (isGoingForward && this.currentTime >= this.duration - buffer) {
+                    isGoingForward = false;
+                    this.playbackRate = -1.0;
+                    this.play();
+                } 
+                // Check if playing backward and near the beginning
+                else if (!isGoingForward && this.currentTime <= buffer) {
+                    isGoingForward = true;
+                    this.playbackRate = 1.0;
                     this.play();
                 }
             });
+             // Ensure it starts playing on load
+            heroVideo.play().catch(e => console.error("Video autoplay failed:", e));
         }
 
 
@@ -483,6 +487,7 @@
     </script>
 </body>
 </html>
+
 
 
 
