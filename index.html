@@ -32,14 +32,13 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            /* This robust ruleset ensures the video covers the screen with minimal cropping */
             min-width: 100%;
             min-height: 100%;
             width: auto;
             height: auto;
-            /* Added scale(0.75) to reduce the video size */
             transform: translateX(-50%) translateY(-50%) scale(0.75);
-            object-fit: cover;
+            /* Changed from 'cover' to 'contain' to prevent cropping */
+            object-fit: contain;
         }
 
         /* The old media query is no longer needed with this improved approach */
