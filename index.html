@@ -21,6 +21,13 @@
             z-index: -1;
             overflow: hidden; /* Ensures video doesn't spill out */
         }
+        /* This pseudo-element creates a vignette effect to soften the video edges */
+        .site-background::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 10, 10, 0.8) 100%);
+        }
         #hero-video {
             position: absolute;
             top: 50%;
@@ -470,6 +477,7 @@
     </script>
 </body>
 </html>
+
 
 
 
