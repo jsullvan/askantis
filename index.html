@@ -37,12 +37,13 @@
             min-height: 100%;
             width: auto;
             height: auto;
-            transform: translateX(-50%) translateY(-50%);
-            object-fit: cover; 
+            /* Added scale(0.75) to reduce the video size */
+            transform: translateX(-50%) translateY(-50%) scale(0.75);
+            object-fit: cover;
         }
 
         /* The old media query is no longer needed with this improved approach */
-        
+
         #home {
             position: relative;
         }
@@ -99,7 +100,7 @@
         .client-logo-link:hover .client-logo {
             transform: scale(1.05);
         }
-        
+
         /* Section Backgrounds and Padding Adjustments */
         #trusted-by, #testimonials, #about, #contact {
             background-color: #f8fafc;
@@ -128,14 +129,12 @@
 <body class="antialiased">
 
     <div class="site-background">
-        <!-- The background video now loops normally -->
         <video id="hero-video" loop autoplay muted playsinline>
             <source src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/hero-background.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold tracking-tighter text-white">
@@ -162,7 +161,6 @@
                 </button>
             </div>
         </div>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
              <div>
                 <button id="mobile-offer-button" class="w-full flex justify-between items-center py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">
@@ -181,7 +179,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="home" class="h-screen flex flex-col justify-between pt-20">
             <div class="content-wrapper text-center px-4 pt-4">
                  <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight text-white" data-aos="fade-down">
@@ -198,7 +195,6 @@
             </a>
         </section>
 
-        <!-- Our Offer Section -->
         <section id="offer" class="py-24 page-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -223,60 +219,50 @@
             </div>
         </section>
 
-        <!-- Trusted By Section -->
         <section id="trusted-by" class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-slate-900 tracking-tighter text-center mb-16" data-aos="fade-up">Trusted By</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8 items-center justify-center max-w-4xl mx-auto">
-                    <!-- SBB -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="100">
                          <a href="https://www.sbb.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
-                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/SBB_CFF_FFS_logo.png" alt="SBB CFF FFS Logo" class="client-logo">
+                              <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/SBB_CFF_FFS_logo.png" alt="SBB CFF FFS Logo" class="client-logo">
                          </a>
                     </div>
-                    <!-- Helvetic -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="150">
                         <a href="https://www.helvetic.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/helvetic.png" alt="Helvetic Airways Logo" class="client-logo">
                         </a>
                     </div>
-                    <!-- Swiss Krono -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="200">
                          <a href="https://www.swisskrono.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
-                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/swiss_krono.png" alt="SWISS KRONO Logo" class="client-logo">
+                              <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/swiss_krono.png" alt="SWISS KRONO Logo" class="client-logo">
                          </a>
                     </div>
-                    <!-- Pax -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="250">
                          <a href="https://www.pax.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
-                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/PAX_Schweizerische_Lebensversicherungs-Gesellschaft_Logo.avif" alt="Pax Logo" class="client-logo">
+                              <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/PAX_Schweizerische_Lebensversicherungs-Gesellschaft_Logo.avif" alt="Pax Logo" class="client-logo">
                          </a>
                     </div>
-                    <!-- Feldschlösschen -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="300">
                         <a href="https://www.feldschloesschen.swiss/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/feldschlosschen_corporate_rgb_pos.png" alt="Feldschlösschen Logo" class="client-logo">
                         </a>
                     </div>
-                    <!-- Garaiolabs -->
                     <div class="flex justify-center h-28 items-center" data-aos="fade-up" data-aos-delay="350">
                         <a href="https://www.garaiolabs.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/garaio.avif" alt="Garaiolabs Logo" class="client-logo" style="max-height: 112px;">
                         </a>
                     </div>
-                    <!-- stwt -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="400">
                         <a href="https://www.stw-thueringen.de/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/stwt.avif" alt="stwt Logo" class="client-logo">
                         </a>
                     </div>
-                    <!-- Nexus -->
                     <div class="flex justify-center h-14" data-aos="fade-up" data-aos-delay="450">
                         <a href="https://nexus-vl.ch/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/nexus.avif" alt="Nexus Personal Lounge Logo" class="client-logo">
                         </a>
                     </div>
-                    <!-- Carhartt -->
                     <div class="flex justify-center h-[168px] items-center" data-aos="fade-up" data-aos-delay="500">
                         <a href="https://www.carhartt.com/" target="_blank" rel="noopener noreferrer" class="client-logo-link">
                             <img src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/trusted_by/carhartt-wip-logo-vector%20(1)_edited.avif" alt="Carhartt Logo" class="client-logo" style="max-height: 168px;">
@@ -286,7 +272,6 @@
             </div>
         </section>
 
-        <!-- Testimonials Section -->
         <section id="testimonials" class="py-24">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-slate-900 tracking-tighter text-center mb-16" data-aos="fade-up">What Clients Say</h2>
@@ -320,7 +305,6 @@
         </section>
 
 
-        <!-- About Us Section -->
         <section id="about" class="py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
@@ -358,7 +342,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-24">
             <div class="container mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
@@ -372,7 +355,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="page-section">
         <div class="container mx-auto px-6 py-8 text-center text-slate-400">
             <div class="mb-8">
@@ -430,7 +412,7 @@
 
         // Initialize Feather Icons
         feather.replace();
-        
+
         // The complex video script is no longer needed.
         // The `loop` attribute on the <video> tag handles everything.
 
@@ -477,9 +459,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
