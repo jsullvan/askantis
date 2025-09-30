@@ -25,11 +25,13 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            /* This single ruleset ensures the video covers the screen on all devices */
-            width: 100%;
-            height: 100%;
+            /* This robust ruleset ensures the video covers the screen with minimal cropping */
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
             transform: translateX(-50%) translateY(-50%);
-            object-fit: cover; /* This is the key: it scales the video to fill the space without distortion */
+            object-fit: cover; 
         }
 
         /* The old media query is no longer needed with this improved approach */
@@ -468,6 +470,7 @@
     </script>
 </body>
 </html>
+
 
 
 
