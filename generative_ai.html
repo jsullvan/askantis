@@ -20,12 +20,11 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
-            background-image: url("images/hero-background.png");
+            background-image: url("https://placehold.co/1200x800/0a0a0a/e2e8f0?text=AI");
             background-size: 70%;
             background-repeat: no-repeat;
             background-position: center center;
-            /* ADDED: Faded the background image to 10% opacity */
-            opacity: 0.1;
+            opacity: 0.05;
         }
         @media (max-width: 767px) {
             .site-background {
@@ -40,11 +39,11 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 70%, rgba(10, 10, 10, 0.9) 100%);
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 70%, rgba(10, 10, 10, 1) 100%);
             z-index: 0;
         }
         .page-section {
-            background-color: rgba(10, 10, 10, 0.9);
+            background-color: #0a0a0a;
         }
         .content-wrapper {
             position: relative;
@@ -69,9 +68,9 @@
                 opacity: 1;
             }
         }
-        .testimonial-card:hover, .faq-item:hover {
+        .testimonial-card:hover, .faq-item:hover, .capability-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         .feature-icon {
             width: 64px;
@@ -83,36 +82,19 @@
             margin: 0 auto;
         }
         .animated-gradient {
-            /* NEW: Custom multi-color gradient for a richer animation */
             background: linear-gradient(to right, #3b82f6, #6366f1, #a855f7, #ec4899, #f97316, #ec4899, #a855f7, #6366f1, #3b82f6);
             background-size: 400% auto;
-            /* Animation speed adjusted for the new, wider gradient */
             animation: text-gradient 12s ease-in-out infinite;
         }
         @keyframes text-gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        /* Styling for the FAQ accordion */
-        details > summary {
-            list-style: none;
-        }
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
-        .faq-arrow {
-            transition: transform 0.3s ease-in-out;
-        }
-        details[open] .faq-arrow {
-            transform: rotate(180deg);
-        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .faq-arrow { transition: transform 0.3s ease-in-out; }
+        details[open] .faq-arrow { transform: rotate(180deg); }
     </style>
 </head>
 <body class="antialiased">
@@ -123,14 +105,12 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold tracking-tighter text-white">
-                <!-- This link now points to the main index.html page -->
-                <a href="index.html">[askantis]</a>
+                <a href="#home">[askantis]</a>
             </h1>
             <nav id="nav-menu" class="hidden md:flex md:items-center space-x-8">
                 <a href="#services" class="text-slate-300 hover:text-white transition-colors duration-300">Services</a>
                 <a href="#approach" class="text-slate-300 hover:text-white transition-colors duration-300">Approach</a>
                 <a href="#casestudies" class="text-slate-300 hover:text-white transition-colors duration-300">Case Studies</a>
-                <!-- ADDED: FAQ link -->
                 <a href="#faq" class="text-slate-300 hover:text-white transition-colors duration-300">FAQ</a>
                 <a href="#contact" class="text-slate-300 hover:text-white transition-colors duration-300">Contact</a>
             </nav>
@@ -141,11 +121,10 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
+        <div id="mobile-menu" class="hidden md:hidden bg-black/50 backdrop-blur-md">
             <a href="#services" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Services</a>
             <a href="#approach" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Approach</a>
             <a href="#casestudies" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Case Studies</a>
-            <!-- ADDED: FAQ link -->
             <a href="#faq" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">FAQ</a>
             <a href="#contact" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Contact</a>
         </div>
@@ -153,7 +132,6 @@
 
     <main>
         <!-- Hero Section -->
-        <!-- UPDATED: Centered title and subtitle vertically -->
         <section id="home" class="h-screen flex flex-col justify-center text-center pt-20">
             <div class="content-wrapper px-4">
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient mb-6" data-aos="fade-down">
@@ -173,7 +151,10 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-white tracking-tighter" data-aos="fade-up">What We Do</h2>
-                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">We cut through the hype, identifying and implementing high-impact AI use-cases tailored to your operations.</p>
+                    <div class="max-w-3xl mx-auto">
+                        <p class="text-slate-400 mt-4" data-aos="fade-up" data-aos-delay="100">We cut through the hype, identifying and implementing high-impact AI use-cases tailored to your operations.</p>
+                        <p class="text-slate-300 mt-4 text-lg" data-aos="fade-up" data-aos-delay="200">We apply our expertise in Generative AI to build tailored applications aimed at increasing both the quality and productivity of your business. Our custom solutions, ranging from sophisticated RAG (Retrieval Augmented Generation) systems to hybrid AI automation tools, deliver significant economic impact.</p>
+                    </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="text-center" data-aos="fade-up">
@@ -216,118 +197,198 @@
                     <p class="text-slate-400 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">A structured, value-driven process from idea to enterprise-scale deployment.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                    <div class="text-center" data-aos="fade-up">
-                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6 text-2xl font-bold">1</div>
-                        <h3 class="text-xl font-bold text-white mb-3">Discovery</h3>
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                           <i data-feather="compass" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">1. Discovery</h3>
                         <p class="text-slate-400">We help you discover use-cases where AI can significantly enhance your operations.</p>
                     </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6 text-2xl font-bold">2</div>
-                        <h3 class="text-xl font-bold text-white mb-3">Proof of Value</h3>
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="check-circle" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">2. Proof of Value</h3>
                         <p class="text-slate-400">We validate the value-add of AI with rapid prototyping and user testing.</p>
                     </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6 text-2xl font-bold">3</div>
-                        <h3 class="text-xl font-bold text-white mb-3">Scale Solution</h3>
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="layers" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">3. Scale Solution</h3>
                         <p class="text-slate-400">Once validated, we scale AI solutions and integrate them into your processes.</p>
                     </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6 text-2xl font-bold">4</div>
-                        <h3 class="text-xl font-bold text-white mb-3">Operate & Support</h3>
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="shield" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">4. Operate & Support</h3>
                         <p class="text-slate-400">We ensure seamless functioning of our AI solutions and provide ongoing support.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Case Studies Section -->
-        <section id="casestudies" class="py-24 page-section">
+        <!-- Case Studies Section with White Background -->
+        <section id="casestudies" class="py-24 bg-white text-gray-800">
             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-white tracking-tighter text-center mb-16" data-aos="fade-up">Proven Success</h2>
-                <div class="max-w-4xl mx-auto space-y-8">
-                    <div class="testimonial-card glass-card p-8 transition duration-300" data-aos="fade-up">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center p-1 flex-shrink-0">
-                                <span class="font-bold text-white">SBB</span>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="font-semibold text-white text-xl">Financial Reporting Co-Pilot</h3>
-                                <p class="text-slate-400 text-sm">Client: SBB CFF FFS</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Challenge</h4>
-                                <p class="text-slate-300">Manual analysis of hundreds of financial KPIs for monthly reports was a complex and time-intensive task for every department.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Solution</h4>
-                                <p class="text-slate-300">Engineered an LLM (GPT-4) to analyze KPIs and write reports matching the style and scope of human-written reports, supported by a data pipeline for cleaning and preprocessing KPI data.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Impact</h4>
-                                <p class="text-slate-300">Achieved significant time savings through autonomous report generation. The AI also provides a valuable second perspective, complementing the human point of view for richer insights.</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 tracking-tighter" data-aos="fade-up">Generative AI: Boosting Quality and Productivity</h2>
+                    <p class="text-blue-600 mt-4 text-2xl font-semibold" data-aos="fade-up" data-aos-delay="100">Featured Generative AI Success Stories</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <!-- Case Study 1 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up">
+                        <img src="./images/Data Transformation Pipeline.png" alt="Financial Reports Automation" class="w-full h-56 object-cover">
+                        <div class="p-8 flex flex-col flex-grow">
+                             <h3 class="font-bold text-gray-900 text-2xl mb-1">Automating Executive Financial Reports</h3>
+                             <p class="text-gray-600 mb-6">Turn complex KPI data into instant, comprehensive reports.</p>
+                             <div class="space-y-4 mt-auto">
+                                 <p class="text-gray-500 text-sm font-semibold">Client: SBB</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">Every department required manual analysis of hundreds of financial KPIs to write a monthly report.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">We implemented an LLM-based report generation system, powered by a data pipeline and feature engineering, to automatically analyse financial KPIs and generate the executive report.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">Time savings and the generation of additional insights. The client recognized the collaboration as a "transformative experience" in leveraging AI for data analytics.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card glass-card p-8 transition duration-300" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center p-1 flex-shrink-0">
-                                <i data-feather="briefcase" class="text-white"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="font-semibold text-white text-xl">Automated Invoice Processing</h3>
-                                <p class="text-slate-400 text-sm">Client: Accounting Consultancy</p>
+                    <!-- Case Study 2 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <img src="./images/Hybrid Document Processing.png" alt="Accounting Automation" class="w-full h-56 object-cover">
+                         <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="font-bold text-gray-900 text-2xl mb-1">Achieving 80% Time Savings in Accounting</h3>
+                            <p class="text-gray-600 mb-6">Revolutionizing document processing with hybrid AI.</p>
+                             <div class="space-y-4 mt-auto">
+                                <p class="text-gray-500 text-sm font-semibold">Client: Fiduciary</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">Accountants had to manually divide large PDF scans into individual invoices, interpret positions, and often perform web research to suggest postings.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">A hybrid AI System (fine-tuned LLM + vision + OCR) was developed that automatically splits documents, classifies them, extracts data into a standardized JSON format, and suggests postings.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">Successful autonomous processing of over 95% of documents, resulting in time savings of 80%.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Challenge</h4>
-                                <p class="text-slate-300">Clients handed in multiple invoice scans in large, single documents. Accountants had to manually divide them and research each line item, which was a cumbersome and repetitive process.</p>
+                    </div>
+                     <!-- Case Study 3 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <img src="./images/Intelligent Profile Matching.png" alt="AI-Powered Recruitment" class="w-full h-56 object-cover">
+                         <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="font-bold text-gray-900 text-2xl mb-1">AI-Powered Candidate Search and Vetting</h3>
+                            <p class="text-gray-600 mb-6">Accelerate recruitment by identifying the perfect fit.</p>
+                             <div class="space-y-4 mt-auto">
+                                <p class="text-gray-500 text-sm font-semibold">Client: Amrop</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">An AI system to support candidate search, efficiently identifying and evaluating candidates against a complex ideal profile.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">Developed an AI system utilizing data enrichment through Webresearch AI. The system evaluates candidates based on the degree of fulfilment against an ideal profile.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">A shortlist of suitable candidates is generated, complete with a rating (e.g., 76% fulfillment) and analysis of sources (e.g., LinkedIn, Company Website).</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Solution</h4>
-                                <p class="text-slate-300">An LLM (GPT-4) based system was developed to read scans with OCR, automatically divide the documents into individual invoices, and then classify and explain each invoice position.</p>
+                        </div>
+                    </div>
+                     <!-- Case Study 4 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                        <img src="./images/Knowledge Centralization and Semantic Search.png" alt="Legal Knowledge Search" class="w-full h-56 object-cover">
+                         <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="font-bold text-gray-900 text-2xl mb-1">Instant Access to Complex Legal Knowledge (RAG)</h3>
+                            <p class="text-gray-600 mb-6">Semantic search instead of keyword hunting.</p>
+                             <div class="space-y-4 mt-auto">
+                                <p class="text-gray-500 text-sm font-semibold">Client: Tax Consultancy</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">Tax legal knowledge was scattered across many sources (online libraries, internal documents), making search time-consuming.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">Aggregation of all legal documents into a centralized vector database (RAG solution). An LLM-based chat allows users to query legal information and receive answers to complex questions.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">Massive time savings, centralized and fast access to knowledge, and the ability to use semantic search rather than simple keyword search.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Impact</h4>
-                                <p class="text-slate-300">Successfully processed over 90% of invoice scans autonomously, relieving staff from a repetitive task and resulting in significant time savings.</p>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Capabilities Section -->
+                <div class="mt-24">
+                    <div class="text-center mb-12">
+                         <h3 class="text-3xl font-bold text-gray-900 tracking-tighter" data-aos="fade-up">Generative AI Core Capabilities</h3>
+                         <p class="text-gray-600 mt-4 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">We build tailored Generative AI applications to increase both quality and productivity. Our expertise covers the full spectrum of Gen AI development, from rapid prototyping to production-ready deployments.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Knowledge Retrieval (RAG)</h4>
+                            <p class="text-gray-700">Custom co-pilots and employee chatbots based on Azure AI studio environments or on-premise solutions for highly sensitive data.</p>
+                        </div>
+                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Data Extraction & Imputation</h4>
+                            <p class="text-gray-700">Structuring and interpretation of unstructured data (PDF, PPTX, HTML, etc.). Includes compliance fulfilment checks and purchase controlling.</p>
+                        </div>
+                         <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Custom Application Assistants & Automation</h4>
+                            <p class="text-gray-700">Fully automating data extraction and booking of receipts/credit card statements (Accounting automation).</p>
+                        </div>
+                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Reporting / Output Generation</h4>
+                            <p class="text-gray-700">Automatic generation of management reports based on financial KPIs. Creating first drafts of project proposals. Generating retail product descriptions from image and supplier data.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- NEW: FAQ Section -->
-        <section id="faq" class="py-24 page-section">
+
+        <!-- FAQ Section with White Background -->
+        <section id="faq" class="py-24 bg-white border-t border-gray-200 text-gray-800">
             <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-white tracking-tighter text-center mb-16" data-aos="fade-up">Frequently Asked Questions</h2>
+                <h2 class="text-4xl font-bold text-gray-900 tracking-tighter text-center mb-16" data-aos="fade-up">Frequently Asked Questions</h2>
                 <div class="max-w-4xl mx-auto space-y-4">
-                    <details class="faq-item glass-card p-6 transition duration-300" data-aos="fade-up">
-                        <summary class="flex justify-between items-center font-semibold text-white text-lg cursor-pointer">
+                    <details class="faq-item bg-gray-50 border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up">
+                        <summary class="flex justify-between items-center font-semibold text-gray-900 text-lg cursor-pointer">
                             How do you ensure data privacy and security?
                             <i data-feather="chevron-down" class="faq-arrow"></i>
                         </summary>
-                        <p class="text-slate-300 mt-4">
+                        <p class="text-gray-700 mt-4">
                             We prioritize data security above all else. Our solutions can be deployed on-premise or in your private cloud, ensuring you retain full control over your data. We adhere to strict data protection protocols and can comply with industry-specific regulations like GDPR and HIPAA.
                         </p>
                     </details>
-                    <details class="faq-item glass-card p-6 transition duration-300" data-aos="fade-up" data-aos-delay="100">
-                        <summary class="flex justify-between items-center font-semibold text-white text-lg cursor-pointer">
+                    <details class="faq-item bg-gray-50 border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <summary class="flex justify-between items-center font-semibold text-gray-900 text-lg cursor-pointer">
                             What kind of ROI can we expect?
                             <i data-feather="chevron-down" class="faq-arrow"></i>
                         </summary>
-                        <p class="text-slate-300 mt-4">
+                        <p class="text-gray-700 mt-4">
                             Return on investment varies by project but is typically measured in productivity gains, cost savings, and quality improvements. For example, automating report generation can save hundreds of hours annually, while AI-powered customer support can reduce overhead and improve customer satisfaction. We work with you to define and track key metrics from the start.
                         </p>
                     </details>
-                    <details class="faq-item glass-card p-6 transition duration-300" data-aos="fade-up" data-aos-delay="200">
-                        <summary class="flex justify-between items-center font-semibold text-white text-lg cursor-pointer">
+                    <details class="faq-item bg-gray-50 border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <summary class="flex justify-between items-center font-semibold text-gray-900 text-lg cursor-pointer">
                             How long does a typical project take?
                             <i data-feather="chevron-down" class="faq-arrow"></i>
                         </summary>
-                        <p class="text-slate-300 mt-4">
+                        <p class="text-gray-700 mt-4">
                             Our "Proof of Value" phase is designed to be quick, typically taking 2-4 weeks. This allows us to demonstrate tangible results with a functional prototype. A full-scale integration and deployment can range from 2 to 6 months, depending on the complexity and your existing infrastructure.
                         </p>
                     </details>
@@ -335,15 +396,14 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-24 page-section">
+        <!-- Contact Section with Light Gray Background -->
+        <section id="contact" class="py-24 bg-gray-100 text-gray-800">
             <div class="container mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
-                    <h2 class="text-4xl font-bold text-white tracking-tighter mb-6">Ready to transform your business with AI?</h2>
-                    <p class="text-xl text-slate-400 mb-10" data-aos="fade-up" data-aos-delay="100">Get in touch with our team to discuss how we can help.</p>
+                    <h2 class="text-4xl font-bold text-gray-900 tracking-tighter mb-6">Ready to transform your business with AI?</h2>
+                    <p class="text-xl text-gray-600 mb-10" data-aos="fade-up" data-aos-delay="100">Get in touch with our team to discuss how we can help.</p>
                     <div data-aos="fade-up" data-aos-delay="200">
-                        <!-- Unified contact email -->
-                        <a href="mailto:contact@askantis.ch" class="inline-block px-10 py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-200 transition duration-300 text-lg">Contact Us</a>
+                        <a href="mailto:contact@askantis.ch" class="inline-block px-10 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300 text-lg">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -351,16 +411,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 page-section">
-        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
             <p>&copy; <span id="year"></span> Askantis. All rights reserved.</p>
-             <!-- Unified contact email -->
             <p class="text-sm mt-2">contact@askantis.ch</p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Added missing Feather Icons script -->
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
         // Set current year in footer
@@ -372,6 +430,8 @@
                 e.preventDefault();
                 const targetElement = document.querySelector(this.getAttribute('href'));
                 if (targetElement) {
+                    // Also close mobile menu on click
+                    document.getElementById('mobile-menu').classList.add('hidden');
                     targetElement.scrollIntoView({
                         behavior: 'smooth'
                     });
@@ -392,23 +452,12 @@
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
         });
     </script>
 </body>
 </html>
-
-
-
-
-
 
 
