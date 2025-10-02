@@ -3,666 +3,905 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generative AI Solutions | Askantis</title>
+    <title>Askantis | AI Systems That Ship</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
         body {
-            background: #000000;
-            color: #ffffff;
+            background: #000;
+            color: #fff;
             overflow-x: hidden;
         }
 
-        /* Animated gradient background */
-        .gradient-bg {
+        /* Neural network background animation */
+        #neural-canvas {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            z-index: -1;
-            background: linear-gradient(125deg, #000000 0%, #0a0a1a 25%, #000814 50%, #001a33 75%, #000000 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating particles effect */
-        .particles {
-            position: fixed;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.15;
         }
 
-        .particle {
+        /* Hero with split reveal */
+        .split-text {
+            overflow: hidden;
+        }
+
+        .split-text span {
+            display: inline-block;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Terminal effect */
+        .terminal {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 8px 12px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .typing-cursor::after {
+            content: '▊';
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Metric counter animation */
+        .metric-counter {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Hover lift effect */
+        .lift-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lift-card:hover {
+            transform: translateY(-12px);
+        }
+
+        /* Gradient border animation */
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(#000, #000) padding-box,
+                        linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899) border-box;
+            border: 1px solid transparent;
+            border-radius: 16px;
+        }
+
+        /* Code block styling */
+        .code-block {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        .code-comment { color: #6b7280; }
+        .code-keyword { color: #8b5cf6; }
+        .code-string { color: #10b981; }
+        .code-number { color: #f59e0b; }
+        .code-function { color: #3b82f6; }
+
+        /* Proof section */
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px;
+            background: #1a1a1a;
+            border: 1px solid #1a1a1a;
+        }
+
+        .proof-cell {
+            background: #000;
+            padding: 32px;
+            transition: background 0.3s ease;
+        }
+
+        .proof-cell:hover {
+            background: #0a0a0a;
+        }
+
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 48px;
+        }
+
+        .timeline-item::before {
+            content: '';
             position: absolute;
+            left: 0;
+            top: 0;
             width: 2px;
-            height: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #3b82f6, transparent);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 14px;
+            height: 14px;
             background: #3b82f6;
             border-radius: 50%;
-            animation: float 15s infinite;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-        }
-
-        /* Glassmorphism cards */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .glass:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(59, 130, 246, 0.3);
-            transform: translateY(-8px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Gradient text animation */
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #3b82f6);
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientText 8s ease infinite;
-        }
-
-        @keyframes gradientText {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Hero section styling */
-        #home {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Floating scroll indicator */
-        .scroll-indicator {
+        /* Scroll indicator */
+        .scroll-prompt {
             position: absolute;
-            bottom: 2rem;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            animation: bounce 2s infinite;
+            animation: scrollBounce 2s ease-in-out infinite;
         }
 
-        @keyframes bounce {
+        @keyframes scrollBounce {
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
             40% { transform: translateX(-50%) translateY(-10px); }
             60% { transform: translateX(-50%) translateY(-5px); }
         }
 
-        /* Section transitions */
-        section {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Stats counter animation */
-        .stat-number {
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* Service icon glow effect */
-        .icon-glow {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .icon-glow:hover {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-        }
-
-        /* Case study card enhancement */
-        .case-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Interactive demo section */
+        .demo-window {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
             overflow: hidden;
         }
 
-        .case-card:hover .case-image {
-            transform: scale(1.05);
-        }
-
-        .case-image {
-            transition: transform 0.6s ease;
-        }
-
-        /* Mobile menu animation */
-        #mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        #mobile-menu.open {
-            max-height: 500px;
-        }
-
-        /* FAQ accordion */
-        details summary {
-            list-style: none;
+        .demo-tab {
+            padding: 12px 24px;
             cursor: pointer;
-            user-select: none;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
         }
 
-        details summary::-webkit-details-marker {
-            display: none;
+        .demo-tab.active {
+            border-bottom-color: #3b82f6;
+            background: #000;
         }
 
-        .faq-icon {
-            transition: transform 0.3s ease;
+        /* Stat pulse animation */
+        .stat-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-        details[open] .faq-icon {
-            transform: rotate(180deg);
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        /* CTA button effect */
-        .cta-button {
+        /* Testimonial styling */
+        .testimonial-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            padding: 32px;
             position: relative;
             overflow: hidden;
-            z-index: 1;
         }
 
-        .cta-button::before {
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            font-size: 80px;
+            color: #1a1a1a;
+            font-family: Georgia, serif;
+        }
+
+        /* CTA section with gradient */
+        .cta-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #be185d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-gradient::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: -1;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Responsive typography */
+        /* Mobile responsive */
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2.5rem !important;
             }
-        }
-
-        /* Number counter styling */
-        .metric-value {
-            font-weight: 800;
-            letter-spacing: -0.02em;
         }
     </style>
 </head>
-<body class="antialiased">
+<body>
+    <!-- Neural network canvas -->
+    <canvas id="neural-canvas"></canvas>
 
-    <!-- Animated background -->
-    <div class="gradient-bg"></div>
-    
-    <!-- Particles effect -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-xl border-b border-white/5">
+    <!-- Minimal header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/5">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-black tracking-tighter">
-                <a href="#home" class="gradient-text">askantis</a>
-            </h1>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#services" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Services</a>
-                <a href="#approach" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Approach</a>
-                <a href="#casestudies" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Case Studies</a>
-                <a href="#contact" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-full transition-colors duration-300 font-semibold">Contact</a>
+            <div class="mono text-lg font-bold">
+                <span class="text-blue-500">$</span> askantis
+            </div>
+            <nav class="hidden md:flex space-x-8 mono text-sm">
+                <a href="#work" class="text-gray-400 hover:text-white transition-colors">work</a>
+                <a href="#stack" class="text-gray-400 hover:text-white transition-colors">stack</a>
+                <a href="#proof" class="text-gray-400 hover:text-white transition-colors">proof</a>
+                <a href="#start" class="text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition-colors">start_project()</a>
             </nav>
-            <button id="mobile-menu-button" class="md:hidden text-white" aria-label="Menu">
+            <button id="mobile-menu-btn" class="md:hidden text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
                 </svg>
             </button>
         </div>
-        <div id="mobile-menu" class="md:hidden bg-black/90 backdrop-blur-xl">
-            <a href="#services" class="block py-3 px-6 hover:bg-white/5">Services</a>
-            <a href="#approach" class="block py-3 px-6 hover:bg-white/5">Approach</a>
-            <a href="#casestudies" class="block py-3 px-6 hover:bg-white/5">Case Studies</a>
-            <a href="#contact" class="block py-3 px-6 hover:bg-white/5">Contact</a>
-        </div>
     </header>
 
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 mono text-2xl">
+            <a href="#work" class="text-gray-400 hover:text-white transition-colors">work</a>
+            <a href="#stack" class="text-gray-400 hover:text-white transition-colors">stack</a>
+            <a href="#proof" class="text-gray-400 hover:text-white transition-colors">proof</a>
+            <a href="#start" class="text-white bg-blue-600 px-6 py-3 rounded">start_project()</a>
+        </div>
+    </div>
+
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="relative">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="hero-title text-6xl md:text-8xl font-black mb-6 gradient-text tracking-tighter" data-aos="fade-up">
-                    Generative AI<br>Solutions
-                </h2>
-                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 font-light leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    Custom large language model applications that transform quality and productivity across your operations
+        <!-- Hero: Bold, direct, confident -->
+        <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-20 relative">
+            <div class="max-w-6xl mx-auto text-center">
+                <div class="mono text-blue-500 text-sm mb-8 tracking-wider">AI_CONSULTANCY_2025</div>
+                <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter leading-none split-text">
+                    <span style="animation-delay: 0.1s">We</span>
+                    <span style="animation-delay: 0.2s"> </span>
+                    <span style="animation-delay: 0.3s">Ship</span>
+                    <span style="animation-delay: 0.4s"> </span>
+                    <span style="animation-delay: 0.5s">AI</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+                    Not decks. Not roadmaps. Not "strategies".<br>
+                    <span class="text-white font-semibold">Production systems that generate revenue.</span>
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#services" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-full font-semibold transition-all duration-300 cta-button">
-                        Explore Solutions
+                
+                <!-- Live terminal demo -->
+                <div class="terminal max-w-3xl mx-auto mb-12">
+                    <div class="terminal-header">
+                        <div class="terminal-dot bg-red-500"></div>
+                        <div class="terminal-dot bg-yellow-500"></div>
+                        <div class="terminal-dot bg-green-500"></div>
+                    </div>
+                    <div class="p-6 text-sm text-left">
+                        <div class="mb-2"><span class="text-gray-500">$</span> <span class="text-blue-400">askantis</span> --deploy production</div>
+                        <div class="text-green-400 mb-2">✓ RAG pipeline: 2.3s avg latency</div>
+                        <div class="text-green-400 mb-2">✓ Document processing: 847 docs/hour</div>
+                        <div class="text-green-400 mb-2">✓ Model accuracy: 94.2%</div>
+                        <div class="text-green-400 mb-4">✓ Cost: $0.03/query</div>
+                        <div class="typing-cursor"><span class="text-gray-500">$</span> Ready for next deployment_</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mono text-sm">
+                    <a href="#start" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded transition-all transform hover:scale-105">
+                        Schedule Technical Call →
                     </a>
-                    <a href="#casestudies" class="px-8 py-4 border border-white/20 hover:border-white/40 rounded-full font-semibold transition-all duration-300">
-                        View Case Studies
+                    <a href="#proof" class="px-8 py-4 border border-white/20 hover:border-white/40 rounded transition-all">
+                        View Production Systems ↓
                     </a>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-                </svg>
-            </div>
-        </section>
 
-        <!-- Impact Metrics -->
-        <section class="py-20 border-y border-white/5">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div data-aos="fade-up">
-                        <div class="metric-value text-5xl md:text-6xl gradient-text mb-2">80%</div>
-                        <div class="text-gray-400 text-sm uppercase tracking-wider">Time Saved</div>
-                    </div>
-                    <div data-aos="fade-up" data-aos-delay="100">
-                        <div class="metric-value text-5xl md:text-6xl gradient-text mb-2">95%</div>
-                        <div class="text-gray-400 text-sm uppercase tracking-wider">Automation Rate</div>
-                    </div>
-                    <div data-aos="fade-up" data-aos-delay="200">
-                        <div class="metric-value text-5xl md:text-6xl gradient-text mb-2">4+</div>
-                        <div class="text-gray-400 text-sm uppercase tracking-wider">Industries</div>
-                    </div>
-                    <div data-aos="fade-up" data-aos-delay="300">
-                        <div class="metric-value text-5xl md:text-6xl gradient-text mb-2">2-4</div>
-                        <div class="text-gray-400 text-sm uppercase tracking-wider">Weeks to POV</div>
-                    </div>
+            <div class="scroll-prompt">
+                <div class="w-6 h-10 border-2 border-gray-600 rounded-full p-1">
+                    <div class="w-1 h-2 bg-gray-600 rounded-full mx-auto"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section id="services" class="py-32">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-20">
-                    <h2 class="text-5xl font-black mb-6 gradient-text tracking-tighter" data-aos="fade-up">Core Capabilities</h2>
-                    <p class="text-xl text-gray-400 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                        Specialised LLM applications built on transformer architectures and retrieval-augmented generation
-                    </p>
-                </div>
+        <!-- The Problem: What others get wrong -->
+        <section class="py-32 px-6 border-t border-white/5">
+            <div class="max-w-4xl mx-auto">
+                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">THE_PROBLEM</div>
+                <h2 class="text-4xl md:text-6xl font-black mb-12">Most AI consultancies are theatres</h2>
                 
-                <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    <!-- Service 1 -->
-                    <div class="glass p-8" data-aos="fade-up">
-                        <div class="w-16 h-16 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6 icon-glow">
-                            <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
+                <div class="space-y-8 text-lg text-gray-300">
+                    <div class="flex gap-4">
+                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
+                        <div>
+                            <strong class="text-white">Strategy decks</strong> with no implementation path
                         </div>
-                        <h3 class="text-2xl font-bold mb-4">Document Intelligence</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Multimodal LLMs with vision transformers extract structured data from unstructured documents. Hybrid architectures combine OCR, fine-tuned classification models, and GPT-4 for document splitting, categorisation, and field extraction.
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
+                        <div>
+                            <strong class="text-white">Proof-of-concepts</strong> that never reach production
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
+                        <div>
+                            <strong class="text-white">"AI transformation"</strong> programmes with zero ROI metrics
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
+                        <div>
+                            <strong class="text-white">Vague promises</strong> about efficiency and innovation
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 p-8 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/20 rounded-lg">
+                    <p class="text-xl text-white font-semibold mb-4">We're different.</p>
+                    <p class="text-gray-300">
+                        We're engineers who build production systems. We write code, optimize inference, debug edge cases, and deploy to your infrastructure. No handoffs. No disappearing after the proposal. Just working systems that process real data and generate measurable value.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Actually Do -->
+        <section id="work" class="py-32 px-6 border-t border-white/5">
+            <div class="max-w-6xl mx-auto">
+                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">WHAT_WE_BUILD</div>
+                <h2 class="text-4xl md:text-6xl font-black mb-20">Production-grade AI systems</h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- System 1 -->
+                    <div class="lift-card gradient-border p-8">
+                        <div class="mono text-sm text-blue-400 mb-4">[DOCUMENT_INTELLIGENCE]</div>
+                        <h3 class="text-2xl font-bold mb-4">Invoice Processing Pipelines</h3>
+                        <p class="text-gray-400 mb-6">
+                            Vision-language models + OCR + custom classifiers. Extracts structured data from unstructured PDFs. Handles edge cases like handwritten notes, multi-page scans, and foreign languages.
+                        </p>
+                        <div class="mono text-xs text-gray-500 space-y-1">
+                            <div>→ 95%+ autonomous processing</div>
+                            <div>→ 80% time reduction</div>
+                            <div>→ $0.08 per document</div>
+                        </div>
+                    </div>
+
+                    <!-- System 2 -->
+                    <div class="lift-card gradient-border p-8">
+                        <div class="mono text-sm text-purple-400 mb-4">[RETRIEVAL_SYSTEMS]</div>
+                        <h3 class="text-2xl font-bold mb-4">Enterprise Knowledge RAG</h3>
+                        <p class="text-gray-400 mb-6">
+                            Vector databases with hybrid search. Chunking strategies optimised for your documents. Re-ranking for precision. LLM synthesis with citation tracking. Self-hosted or cloud.
+                        </p>
+                        <div class="mono text-xs text-gray-500 space-y-1">
+                            <div>→ Sub-second retrieval</div>
+                            <div>→ 92% answer accuracy</div>
+                            <div>→ Scales to millions of docs</div>
+                        </div>
+                    </div>
+
+                    <!-- System 3 -->
+                    <div class="lift-card gradient-border p-8">
+                        <div class="mono text-sm text-pink-400 mb-4">[AGENTIC_WORKFLOWS]</div>
+                        <h3 class="text-2xl font-bold mb-4">Multi-Agent Research Systems</h3>
+                        <p class="text-gray-400 mb-6">
+                            LLM agents with tool calling. Web scraping, API integration, data enrichment. Orchestration with validation loops. Human-in-the-loop for critical decisions.
+                        </p>
+                        <div class="mono text-xs text-gray-500 space-y-1">
+                            <div>→ 10x research speed</div>
+                            <div>→ Automated fact-checking</div>
+                            <div>→ Source attribution</div>
+                        </div>
+                    </div>
+
+                    <!-- System 4 -->
+                    <div class="lift-card gradient-border p-8">
+                        <div class="mono text-sm text-orange-400 mb-4">[ANALYTICS_AUTOMATION]</div>
+                        <h3 class="text-2xl font-bold mb-4">Automated Reporting Engines</h3>
+                        <p class="text-gray-400 mb-6">
+                            LLMs that analyse time-series data, detect anomalies, and generate natural language insights. Feature engineering pipelines. Customisable output formats.
+                        </p>
+                        <div class="mono text-xs text-gray-500 space-y-1">
+                            <div>→ Daily automated reports</div>
+                            <div>→ Anomaly detection</div>
+                            <div>→ Natural language summaries</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack: Show the receipts -->
+        <section id="stack" class="py-32 px-6 border-t border-white/5">
+            <div class="max-w-6xl mx-auto">
+                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">TECHNOLOGY_STACK</div>
+                <h2 class="text-4xl md:text-6xl font-black mb-12">Tools we deploy to production</h2>
+
+                <div class="grid md:grid-cols-3 gap-1 bg-white/5 border border-white/5 rounded-lg overflow-hidden mb-12">
+                    <div class="bg-black p-6">
+                        <div class="mono text-xs text-blue-400 mb-3">LLM_PROVIDERS</div>
+                        <div class="space-y-2 text-sm text-gray-300">
+                            <div>• OpenAI GPT-4 / GPT-4o</div>
+                            <div>• Anthropic Claude Sonnet/Opus</div>
+                            <div>• Azure OpenAI</div>
+                            <div>• Open-source (Llama, Mistral)</div>
+                        </div>
+                    </div>
+                    <div class="bg-black p-6">
+                        <div class="mono text-xs text-purple-400 mb-3">VECTOR_DATABASES</div>
+                        <div class="space-y-2 text-sm text-gray-300">
+                            <div>• Pinecone</div>
+                            <div>• Qdrant</div>
+                            <div>• Weaviate</div>
+                            <div>• pgvector (PostgreSQL)</div>
+                        </div>
+                    </div>
+                    <div class="bg-black p-6">
+                        <div class="mono text-xs text-pink-400 mb-3">ORCHESTRATION</div>
+                        <div class="space-y-2 text-sm text-gray-300">
+                            <div>• LangChain / LangGraph</div>
+                            <div>• LlamaIndex</div>
+                            <div>• Custom Python pipelines</div>
+                            <div>• FastAPI / Flask</div>
+                        </div>
+                    </div>
+                    <div class="bg-black p-6">
+                        <div class="mono text-xs text-orange-400 mb-3">INFRASTRUCTURE</div>
+                        <div class="space-y-2 text-sm text-gray-300">
+                            <div>• Docker / Kubernetes</div>
+                            <div>• Azure / AWS / GCP</div>
+                            <div>• On-premise deployment</div>
+                            <div>• CI/CD pipelines</div>
+                        </div>
+                    </div>
+                    <div class="bg-black p-6">
+                        <div class="mono text-xs text-green-400 mb-3">EVALUATION</div>
+                        <div class="space-y-2 text-sm text-gray-300">
+                            <div>• RAGAS framework</div>
+                            <div>• Custom evaluation sets</div>
+                            <div>• A/B testing</div>
+                            <div>• Human eval loops</div>
+                        </div>
+                    </div>
+                    <div class="bg-black p-6">
+                        <div class="mono text-xs text-yellow-400 mb-3">MONITORING</div>
+                        <div class="space-y-2 text-sm text-gray-300">
+                            <div>• LangSmith / Weights & Biases</div>
+                            <div>• Prometheus / Grafana</div>
+                            <div>• Error tracking</div>
+                            <div>• Cost monitoring</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code example -->
+                <div class="code-block">
+                    <div class="code-comment"># Example: Production RAG pipeline</div>
+                    <div><span class="code-keyword">from</span> langchain.vectorstores <span class="code-keyword">import</span> Pinecone</div>
+                    <div><span class="code-keyword">from</span> langchain.embeddings <span class="code-keyword">import</span> OpenAIEmbeddings</div>
+                    <div class="mt-4"><span class="code-keyword">def</span> <span class="code-function">query_knowledge_base</span>(query: <span class="code-keyword">str</span>):</div>
+                    <div class="ml-4">vectorstore = Pinecone.from_existing_index(</div>
+                    <div class="ml-8">index_name=<span class="code-string">"enterprise-docs"</span>,</div>
+                    <div class="ml-8">embedding=OpenAIEmbeddings()</div>
+                    <div class="ml-4">)</div>
+                    <div class="ml-4 mt-2">docs = vectorstore.similarity_search(query, k=<span class="code-number">5</span>)</div>
+                    <div class="ml-4">context = <span class="code-string">"\n"</span>.join([d.page_content <span class="code-keyword">for</span> d <span class="code-keyword">in</span> docs])</div>
+                    <div class="ml-4 mt-2"><span class="code-keyword">return</span> generate_response(context, query)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proof: Real results -->
+        <section id="proof" class="py-32 px-6 border-t border-white/5">
+            <div class="max-w-7xl mx-auto">
+                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">PRODUCTION_METRICS</div>
+                <h2 class="text-4xl md:text-6xl font-black mb-20">Systems in production</h2>
+
+                <div class="proof-grid rounded-lg overflow-hidden mb-16">
+                    <div class="proof-cell">
+                        <div class="text-5xl font-black mb-2 gradient-text">80%</div>
+                        <div class="text-gray-400 text-sm">Time reduction</div>
+                        <div class="mono text-xs text-gray-600 mt-2">Invoice processing automation</div>
+                    </div>
+                    <div class="proof-cell">
+                        <div class="text-5xl font-black mb-2 gradient-text">95%</div>
+                        <div class="text-gray-400 text-sm">Autonomous rate</div>
+                        <div class="mono text-xs text-gray-600 mt-2">Document classification accuracy</div>
+                    </div>
+                    <div class="proof-cell">
+                        <div class="text-5xl font-black mb-2 gradient-text">2.3s</div>
+                        <div class="text-gray-400 text-sm">Avg latency</div>
+                        <div class="mono text-xs text-gray-600 mt-2">RAG system query response</div>
+                    </div>
+                    <div class="proof-cell">
+                        <div class="text-5xl font-black mb-2 gradient-text">$0.03</div>
+                        <div class="text-gray-400 text-sm">Per query</div>
+                        <div class="mono text-xs text-gray-600 mt-2">Knowledge base search cost</div>
+                    </div>
+                </div>
+
+                <!-- Case studies with real detail -->
+                <div class="space-y-8">
+                    <!-- Case 1 -->
+                    <div class="gradient-border p-8">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-1">
+                                <div class="mono text-xs text-blue-400 mb-3">SBB_FINANCIAL_SERVICES</div>
+                                <h3 class="text-2xl font-bold mb-4">Automated KPI Reporting Engine</h3>
+                                <p class="text-gray-400 mb-4">
+                                    Built data pipeline + LLM analysis system. Ingests 100+ financial KPIs, detects trends/anomalies, generates executive summaries in natural language.
+                                </p>
+                                <div class="mono text-sm space-y-2 text-gray-500">
+                                    <div><span class="text-blue-400">Stack:</span> Python, GPT-4, Pandas, Custom ETL</div>
+                                    <div><span class="text-blue-400">Timeline:</span> 3 weeks POV → 8 weeks production</div>
+                                    <div><span class="text-blue-400">Impact:</span> Hours saved per report cycle</div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/3 bg-gradient-to-br from-blue-900/20 to-blue-600/20 rounded-lg p-6 flex flex-col justify-center">
+                                <div class="text-4xl font-black mb-2">100+</div>
+                                <div class="text-sm text-gray-400">KPIs analysed automatically</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 2 -->
+                    <div class="gradient-border p-8">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-1">
+                                <div class="mono text-xs text-purple-400 mb-3">FIDUCIARY_ACCOUNTING</div>
+                                <h3 class="text-2xl font-bold mb-4">Hybrid Document Processing System</h3>
+                                <p class="text-gray-400 mb-4">
+                                    Vision LLM + OCR + fine-tuned classifiers. Splits scanned PDFs, extracts invoice data, validates against rules, suggests accounting entries.
+                                </p>
+                                <div class="mono text-sm space-y-2 text-gray-500">
+                                    <div><span class="text-purple-400">Stack:</span> GPT-4V, Tesseract, Custom ML, FastAPI</div>
+                                    <div><span class="text-purple-400">Timeline:</span> 2 weeks POV → 12 weeks production</div>
+                                    <div><span class="text-purple-400">Impact:</span> 80% time reduction, 95% accuracy</div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/3 bg-gradient-to-br from-purple-900/20 to-purple-600/20 rounded-lg p-6 flex flex-col justify-center">
+                                <div class="text-4xl font-black mb-2">847</div>
+                                <div class="text-sm text-gray-400">Documents processed per hour</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 3 -->
+                    <div class="gradient-border p-8">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-1">
+                                <div class="mono text-xs text-pink-400 mb-3">TAX_CONSULTANCY_LEGAL</div>
+                                <h3 class="text-2xl font-bold mb-4">Enterprise RAG Knowledge System</h3>
+                                <p class="text-gray-400 mb-4">
+                                    Indexed 10,000+ legal documents. Hybrid search (semantic + keyword). LLM synthesis with source citations. Private deployment for sensitive data.
+                                </p>
+                                <div class="mono text-sm space-y-2 text-gray-500">
+                                    <div><span class="text-pink-400">Stack:</span> Qdrant, Claude, Custom embeddings</div>
+                                    <div><span class="text-pink-400">Timeline:</span> 4 weeks POV → 10 weeks production</div>
+                                    <div><span class="text-pink-400">Impact:</span> Instant semantic search, cited answers</div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/3 bg-gradient-to-br from-pink-900/20 to-pink-600/20 rounded-lg p-6 flex flex-col justify-center">
+                                <div class="text-4xl font-black mb-2">10K+</div>
+                                <div class="text-sm text-gray-400">Legal documents indexed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How We Work: Clear process -->
+        <section class="py-32 px-6 border-t border-white/5">
+            <div class="max-w-4xl mx-auto">
+                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">METHODOLOGY</div>
+                <h2 class="text-4xl md:text-6xl font-black mb-20">How we work with you</h2>
+
+                <div class="space-y-12">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="mono text-xs text-blue-400 mb-2">WEEK_1-2</div>
+                        <h3 class="text-2xl font-bold mb-3">Discovery & Scoping</h3>
+                        <p class="text-gray-400">
+                            We interview stakeholders, audit your data infrastructure, identify high-ROI use cases. Output: Technical specification + cost estimate + timeline.
                         </p>
                     </div>
 
-                    <!-- Service 2 -->
-                    <div class="glass p-8" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-16 h-16 bg-purple-600/20 rounded-2xl flex items-center justify-center mb-6 icon-glow">
-                            <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Enterprise RAG Systems</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Vector databases with semantic search enable natural language queries across your knowledge base. Embedding models convert documents into high-dimensional vectors, whilst LLMs generate contextually accurate responses with source attribution.
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="mono text-xs text-purple-400 mb-2">WEEK_3-4</div>
+                        <h3 class="text-2xl font-bold mb-3">Proof of Value</h3>
+                        <p class="text-gray-400">
+                            We build a working prototype on your real data. You test it with actual users. We iterate based on feedback. Go/no-go decision based on metrics.
                         </p>
                     </div>
 
-                    <!-- Service 3 -->
-                    <div class="glass p-8" data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-16 h-16 bg-pink-600/20 rounded-2xl flex items-center justify-center mb-6 icon-glow">
-                            <svg class="w-8 h-8 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Intelligent Analytics</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            LLMs analyse quantitative data to identify patterns and generate insights. Feature engineering pipelines transform raw metrics into contextual narratives, automating report generation with statistical accuracy.
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="mono text-xs text-pink-400 mb-2">WEEK_5-12</div>
+                        <h3 class="text-2xl font-bold mb-3">Production Engineering</h3>
+                        <p class="text-gray-400">
+                            We build the production system: error handling, monitoring, testing, documentation. We integrate with your infrastructure. We set up deployment pipelines.
                         </p>
                     </div>
 
-                    <!-- Service 4 -->
-                    <div class="glass p-8" data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-16 h-16 bg-orange-600/20 rounded-2xl flex items-center justify-center mb-6 icon-glow">
-                            <svg class="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Agentic Workflows</h3>
-                        <p class="text-gray-400 leading-relaxed">
-                            Multi-agent systems with tool-calling capabilities automate complex processes. Agents conduct web research, integrate with APIs, and execute decision trees with human-in-the-loop validation for critical tasks.
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="mono text-xs text-orange-400 mb-2">ONGOING</div>
+                        <h3 class="text-2xl font-bold mb-3">Support & Optimisation</h3>
+                        <p class="text-gray-400">
+                            We monitor performance, fix issues, optimise costs, update models. Optional: we train your team to maintain the system internally.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Approach Section -->
-        <section id="approach" class="py-32 border-t border-white/5">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-20">
-                    <h2 class="text-5xl font-black mb-6 gradient-text tracking-tighter" data-aos="fade-up">Methodology</h2>
-                    <p class="text-xl text-gray-400 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                        Evidence-based development from hypothesis to production deployment
-                    </p>
+        <!-- What Makes Us Different -->
+        <section class="py-32 px-6 border-t border-white/5">
+            <div class="max-w-6xl mx-auto">
+                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">DIFFERENTIATION</div>
+                <h2 class="text-4xl md:text-6xl font-black mb-20">Why companies choose us</h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="p-8 bg-gradient-to-br from-blue-900/10 to-transparent border border-blue-500/20 rounded-lg">
+                        <div class="text-3xl mb-4">⚡</div>
+                        <h3 class="text-xl font-bold mb-3">Speed to Production</h3>
+                        <p class="text-gray-400">
+                            2-4 week proof of value. No 6-month "strategy phases". If we can't show working code in a month, we don't take the project.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gradient-to-br from-purple-900/10 to-transparent border border-purple-500/20 rounded-lg">
+                        <div class="text-3xl mb-4">🔬</div>
+                        <h3 class="text-xl font-bold mb-3">Technical Depth</h3>
+                        <p class="text-gray-400">
+                            We're engineers, not salespeople. We understand transformers, vector search, fine-tuning, inference optimisation. We read papers. We write code.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gradient-to-br from-pink-900/10 to-transparent border border-pink-500/20 rounded-lg">
+                        <div class="text-3xl mb-4">💰</div>
+                        <h3 class="text-xl font-bold mb-3">Clear Economics</h3>
+                        <p class="text-gray-400">
+                            Fixed-price proof of value. Transparent cost breakdowns. ROI projections based on actual usage. No hidden fees.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-gradient-to-br from-orange-900/10 to-transparent border border-orange-500/20 rounded-lg">
+                        <div class="text-3xl mb-4">🛡️</div>
+                        <h3 class="text-xl font-bold mb-3">Security & Compliance</h3>
+                        <p class="text-gray-400">
+                            On-premise deployment options. GDPR compliance. No data used for training. SOC 2 compatible infrastructure. Air-gapped environments possible.
+                        </p>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- FAQ with straight answers -->
+        <section class="py-32 px-6 border-t border-white/5">
+            <div class="max-w-4xl mx-auto">
+                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">FAQ</div>
+                <h2 class="text-4xl md:text-6xl font-black mb-12">Straight answers</h2>
+
+                <div class="space-y-6">
+                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
+                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                            How much does this cost?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <p class="text-gray-400 mt-4">
+                            Proof of Value: Fixed €8K-15K for 2-4 weeks. Production system: Depends on complexity, typically €30K-80K for 8-12 weeks. Ongoing support: €2K-5K/month or we train your team.
+                        </p>
+                    </details>
+
+                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
+                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                            What if the POV doesn't work?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <p class="text-gray-400 mt-4">
+                            You walk away. No obligation to proceed. We're honest about what AI can and can't do. If the metrics don't justify production deployment, we tell you.
+                        </p>
+                    </details>
+
+                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
+                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                            Do you work with sensitive data?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <p class="text-gray-400 mt-4">
+                            Yes. We deploy on-premise or in your private cloud. We use Azure OpenAI (GDPR compliant, data not used for training) or self-hosted open-source models. NDAs standard. SOC 2 processes available.
+                        </p>
+                    </details>
+
+                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
+                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                            What industries do you work with?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <p class="text-gray-400 mt-4">
+                            Financial services, legal/tax consultancy, manufacturing, logistics, professional services. Any industry with document-heavy processes, knowledge bases, or repetitive analytical work.
+                        </p>
+                    </details>
+
+                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
+                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
+                            Do we need an AI team internally?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <p class="text-gray-400 mt-4">
+                            No. We build systems that your existing IT team can maintain, or we provide ongoing support. We document everything and can train your developers if you want to bring it in-house.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA: Direct and compelling -->
+        <section id="start" class="py-32 px-6 border-t border-white/5 cta-gradient">
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <h2 class="text-4xl md:text-6xl font-black mb-6">Let's build something</h2>
+                <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+                    Schedule a 30-minute technical call. We'll audit your use case and tell you honestly if AI can help. No sales pitch, no obligations.
+                </p>
                 
-                <div class="max-w-5xl mx-auto">
-                    <div class="space-y-6">
-                        <!-- Step 1 -->
-                        <div class="glass p-8 flex flex-col md:flex-row items-start gap-6" data-aos="fade-right">
-                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl">1</div>
-                            <div>
-                                <h3 class="text-2xl font-bold mb-3">Discovery & Use Case Identification</h3>
-                                <p class="text-gray-400">
-                                    Process analysis identifies high-impact automation opportunities. We evaluate technical feasibility, data availability, and ROI potential for each use case.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Step 2 -->
-                        <div class="glass p-8 flex flex-col md:flex-row items-start gap-6" data-aos="fade-right" data-aos-delay="100">
-                            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl">2</div>
-                            <div>
-                                <h3 class="text-2xl font-bold mb-3">Proof of Value (2-4 weeks)</h3>
-                                <p class="text-gray-400">
-                                    Rapid prototyping validates the hypothesis. Functional MVPs demonstrate accuracy, latency, and cost metrics on real data, establishing clear success criteria.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div class="glass p-8 flex flex-col md:flex-row items-start gap-6" data-aos="fade-right" data-aos-delay="200">
-                            <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl">3</div>
-                            <div>
-                                <h3 class="text-2xl font-bold mb-3">Production Engineering</h3>
-                                <p class="text-gray-400">
-                                    Systems are architected for scale with monitoring, error handling, and evaluation frameworks. Integration with existing infrastructure ensures seamless deployment.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Step 4 -->
-                        <div class="glass p-8 flex flex-col md:flex-row items-start gap-6" data-aos="fade-right" data-aos-delay="300">
-                            <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl">4</div>
-                            <div>
-                                <h3 class="text-2xl font-bold mb-3">Operations & Optimisation</h3>
-                                <p class="text-gray-400">
-                                    Continuous monitoring tracks performance metrics. Model updates, prompt refinement, and cost optimisation ensure sustained value delivery.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Case Studies Section -->
-        <section id="casestudies" class="py-32 border-t border-white/5">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-20">
-                    <h2 class="text-5xl font-black mb-6 gradient-text tracking-tighter" data-aos="fade-up">Impact</h2>
-                    <p class="text-xl text-gray-400 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                        Quantifiable results from production deployments
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    <!-- Case Study 1 -->
-                    <div class="glass case-card overflow-hidden" data-aos="fade-up">
-                        <div class="aspect-video bg-gradient-to-br from-blue-900 to-blue-600 case-image flex items-center justify-center">
-                            <svg class="w-20 h-20 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                        </div>
-                        <div class="p-8">
-                            <div class="text-sm text-blue-400 font-semibold mb-2">SBB | Financial Services</div>
-                            <h3 class="text-2xl font-bold mb-4">Automated Executive Reporting</h3>
-                            <p class="text-gray-400 mb-6">
-                                LLM-powered analytics pipeline generates monthly reports from 100+ KPIs. Feature engineering transforms time-series data into narrative insights with variance analysis.
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">Hours saved per report generation cycle</span>
-                                </div>
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">Additional insights from trend detection</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 2 -->
-                    <div class="glass case-card overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                        <div class="aspect-video bg-gradient-to-br from-purple-900 to-purple-600 case-image flex items-center justify-center">
-                            <svg class="w-20 h-20 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div class="p-8">
-                            <div class="text-sm text-purple-400 font-semibold mb-2">Fiduciary | Accounting</div>
-                            <h3 class="text-2xl font-bold mb-4">Document Processing Automation</h3>
-                            <p class="text-gray-400 mb-6">
-                                Hybrid vision-language model pipeline processes invoice scans. System performs document segmentation, classification, OCR, and entity extraction to JSON format.
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">80% reduction in processing time</span>
-                                </div>
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">95%+ autonomous processing accuracy</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 3 -->
-                    <div class="glass case-card overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                        <div class="aspect-video bg-gradient-to-br from-pink-900 to-pink-600 case-image flex items-center justify-center">
-                            <svg class="w-20 h-20 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                            </svg>
-                        </div>
-                        <div class="p-8">
-                            <div class="text-sm text-pink-400 font-semibold mb-2">Amrop | Executive Search</div>
-                            <h3 class="text-2xl font-bold mb-4">Intelligent Candidate Matching</h3>
-                            <p class="text-gray-400 mb-6">
-                                Multi-agent system conducts web research and evaluates candidates against position requirements. Semantic matching scores profile alignment with source attribution.
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">Automated shortlist with compatibility scores</span>
-                                </div>
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">Source verification across platforms</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 4 -->
-                    <div class="glass case-card overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                        <div class="aspect-video bg-gradient-to-br from-orange-900 to-orange-600 case-image flex items-center justify-center">
-                            <svg class="w-20 h-20 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                            </svg>
-                        </div>
-                        <div class="p-8">
-                            <div class="text-sm text-orange-400 font-semibold mb-2">Tax Consultancy | Legal</div>
-                            <h3 class="text-2xl font-bold mb-4">Enterprise Knowledge RAG</h3>
-                            <p class="text-gray-400 mb-6">
-                                Vector database indexes thousands of legal documents. Embedding similarity retrieves relevant passages, whilst LLM synthesises answers with citation tracking.
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">Semantic search vs keyword matching</span>
-                                </div>
-                                <div class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    <span class="text-gray-300">Unified knowledge access point</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="py-32 border-t border-white/5">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-20">
-                    <h2 class="text-5xl font-black mb-6 gradient-text tracking-tighter" data-aos="fade-up">Technical FAQs</h2>
-                </div>
-                
-                <div class="max-w-4xl mx-auto space-y-4">
-                    <details class="glass p-6" data-aos="fade-up">
-                        <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                            How is data security ensured?
-                            <svg class="w-5 h-5 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </summary>
-                        <p class="text-gray-400 mt-4">
-                            On-premise deployment or private cloud environments ensure data sovereignty. Azure OpenAI Service provides enterprise compliance (GDPR, SOC 2), with data never used for model training. Self-hosted open-source models available for maximum control.
-                        </p>
-                    </details>
-
-                    <details class="glass p-6" data-aos="fade-up" data-aos-delay="100">
-                        <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                            What infrastructure is required?
-                            <svg class="w-5 h-5 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </summary>
-                        <p class="text-gray-400 mt-4">
-                            Cloud-based solutions leverage managed services (Azure OpenAI, Pinecone). On-premise deployments require GPU infrastructure for hosting open-source models. Architecture scales from proof-of-concept to enterprise loads.
-                        </p>
-                    </details>
-
-                    <details class="glass p-6" data-aos="fade-up" data-aos-delay="200">
-                        <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                            How are models evaluated?
-                            <svg class="w-5 h-5 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </summary>
-                        <p class="text-gray-400 mt-4">
-                            Evaluation frameworks track accuracy, hallucination rates, and latency. A/B testing compares model versions. Human evaluation loops ensure alignment with business requirements. Continuous monitoring detects performance degradation.
-                        </p>
-                    </details>
-
-                    <details class="glass p-6" data-aos="fade-up" data-aos-delay="300">
-                        <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg">
-                            What is the timeline to production?
-                            <svg class="w-5 h-5 faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </summary>
-                        <p class="text-gray-400 mt-4">
-                            Proof of Value in 2-4 weeks validates feasibility. Production deployment ranges from 2-6 months depending on integration complexity, data preparation requirements, and infrastructure setup.
-                        </p>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-32 border-t border-white/5">
-            <div class="container mx-auto px-6">
-                <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
-                    <h2 class="text-5xl font-black mb-6 gradient-text tracking-tighter">Start Building</h2>
-                    <p class="text-xl text-gray-400 mb-12">
-                        Discuss technical requirements and deployment options
-                    </p>
-                    <a href="mailto:contact@askantis.ch" class="inline-block px-12 py-5 bg-blue-600 hover:bg-blue-700 rounded-full font-bold text-lg transition-all duration-300 cta-button">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                    <a href="mailto:contact@askantis.ch" class="px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all mono">
                         contact@askantis.ch
                     </a>
+                    <div class="text-white/70">or</div>
+                    <a href="https://calendly.com/askantis" class="px-8 py-4 border-2 border-white text-white font-bold rounded hover:bg-white hover:text-black transition-all mono">
+                        Book Technical Call
+                    </a>
+                </div>
+
+                <div class="mono text-sm text-white/60">
+                    Based in Switzerland • Serving Europe & Beyond
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-8 border-t border-white/5">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; <span id="year"></span> Askantis</p>
+    <!-- Minimal footer -->
+    <footer class="py-8 px-6 border-t border-white/5">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+            <div class="mono mb-4 md:mb-0">© 2025 Askantis</div>
+            <div class="flex gap-6 mono">
+                <a href="mailto:contact@askantis.ch" class="hover:text-white transition-colors">Email</a>
+                <a href="https://linkedin.com/company/askantis" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://github.com/askantis" class="hover:text-white transition-colors">GitHub</a>
+            </div>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Current year
-        document.getElementById('year').textContent = new Date().getFullYear();
+        // Neural network background animation
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100,
-            easing: 'ease-out-cubic'
+        const nodes = [];
+        const nodeCount = 80;
+        const maxDistance = 150;
+
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            nodes.forEach(node => {
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = '#3b82f6';
+                ctx.fill();
+            });
+            
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance / maxDistance})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
         });
 
         // Smooth scroll
@@ -671,29 +910,17 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    document.getElementById('mobile-menu').classList.remove('open');
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
+        // Animate split text on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.split-text span').forEach((span, i) => {
+                span.style.animationDelay = `${i * 0.1}s`;
+            });
         });
-
-        // Generate particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            particlesContainer.appendChild(particle);
-        }
     </script>
 </body>
 </html>
