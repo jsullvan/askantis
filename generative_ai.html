@@ -581,27 +581,18 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Case Study 2 -->
-                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="100">
-                        <img src="./images/Hybrid Document Processing.png" alt="Accounting Automation" class="w-full h-56 object-cover">
-                         <div class="p-8 flex flex-col flex-grow">
-                            <h3 class="font-bold text-gray-900 text-2xl mb-1">Achieving 80% Time Savings in Accounting</h3>
-                            <p class="text-gray-600 mb-6">Revolutionizing document processing with hybrid AI.</p>
-                             <div class="space-y-4 mt-auto">
-                                <p class="text-gray-500 text-sm font-semibold">Client: Fiduciary</p>
-                                <div>
-                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
-                                    <p class="text-gray-700">Accountants had to manually divide large PDF scans into individual invoices, interpret positions, and often perform web research to suggest postings.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
-                                    <p class="text-gray-700">A hybrid AI System (fine-tuned LLM + vision + OCR) was developed that automatically splits documents, classifies them, extracts data into a standardized JSON format, and suggests postings.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
-                                    <p class="text-gray-700">Successful autonomous processing of over 95% of documents, resulting in time savings of 80%.</p>
-                                </div>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                <p class="text-slate-300">Manual analysis of hundreds of financial KPIs for monthly reports was a complex and time-intensive task for every department.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                <p class="text-slate-300">Engineered an LLM (GPT-4) to analyze KPIs and write reports matching the style and scope of human-written reports, supported by a data pipeline for cleaning and preprocessing KPI data.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                <p class="text-slate-300">Achieved significant time savings through autonomous report generation. The AI also provides a valuable second perspective, complementing the human point of view for richer insights.</p>
                             </div>
                         </div>
                     </div>
@@ -954,8 +945,20 @@
                 span.style.animationDelay = `${i * 0.1}s`;
             });
         });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
     </script>
 </body>
 </html>
+
+
+
+
+
 
 
