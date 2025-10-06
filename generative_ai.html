@@ -3,560 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Askantis | AI Systems That Ship</title>
+    <title>Generative AI | Askantis</title>
+    <!-- Using consistent, official Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-        
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
         body {
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e2e8f0;
         }
-
-        /* Neural network background animation */
-        #neural-canvas {
+        .site-background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
-            opacity: 0.15;
+            background-image: url("https://placehold.co/1200x800/0a0a0a/e2e8f0?text=AI");
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            opacity: 0.05;
         }
-
-        /* Hero with split reveal */
-        .split-text {
-            overflow: hidden;
+        @media (max-width: 767px) {
+            .site-background {
+                background-size: cover;
+                background-position: center 25%;
+            }
         }
-
-        .split-text span {
-            display: inline-block;
-            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateY(100%);
+        #home {
+            position: relative;
         }
-
-        @keyframes slideUp {
-            to {
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 70%, rgba(10, 10, 10, 1) 100%);
+            z-index: 0;
+        }
+        .page-section {
+            background-color: #0a0a0a;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(55, 65, 81, 0.3);
+            border-radius: 1rem;
+        }
+        .scroll-down-arrow svg {
+            animation: breathe 2.5s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.1) translateY(-5px);
                 opacity: 1;
-                transform: translateY(0);
             }
         }
-
-        /* Terminal effect */
-        .terminal {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            overflow: hidden;
+        .testimonial-card:hover, .faq-item:hover, .capability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-
-        .terminal-header {
-            background: #1a1a1a;
-            padding: 8px 12px;
+        .feature-icon {
+            width: 64px;
+            height: 64px;
             display: flex;
-            gap: 6px;
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
+            margin: 0 auto;
         }
-
-        .typing-cursor::after {
-            content: '▊';
-            animation: blink 1s step-end infinite;
-            margin-left: 2px;
+        .animated-gradient {
+            background: linear-gradient(to right, #3b82f6, #6366f1, #a855f7, #ec4899, #f97316, #ec4899, #a855f7, #6366f1, #3b82f6);
+            background-size: 400% auto;
+            animation: text-gradient 12s ease-in-out infinite;
         }
-
-        @keyframes blink {
-            50% { opacity: 0; }
+        @keyframes text-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        /* Metric counter animation */
-        .metric-counter {
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* Hover lift effect */
-        .lift-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .lift-card:hover {
-            transform: translateY(-12px);
-        }
-
-        /* Gradient border animation */
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(#000, #000) padding-box,
-                        linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899) border-box;
-            border: 1px solid transparent;
-            border-radius: 16px;
-        }
-
-        /* Code block styling */
-        .code-block {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            border-radius: 12px;
-            padding: 24px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            overflow-x: auto;
-        }
-
-        .code-comment { color: #6b7280; }
-        .code-keyword { color: #8b5cf6; }
-        .code-string { color: #10b981; }
-        .code-number { color: #f59e0b; }
-        .code-function { color: #3b82f6; }
-
-        /* Proof section */
-        .proof-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1px;
-            background: #1a1a1a;
-            border: 1px solid #1a1a1a;
-        }
-
-        .proof-cell {
-            background: #000;
-            padding: 32px;
-            transition: background 0.3s ease;
-        }
-
-        .proof-cell:hover {
-            background: #0a0a0a;
-        }
-
-        /* Timeline */
-        .timeline-item {
-            position: relative;
-            padding-left: 48px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(to bottom, #3b82f6, transparent);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -6px;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            background: #3b82f6;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
-        }
-
-        /* Scroll indicator */
-        .scroll-prompt {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: scrollBounce 2s ease-in-out infinite;
-        }
-
-        @keyframes scrollBounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        /* Interactive demo section */
-        .demo-window {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .demo-tab {
-            padding: 12px 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-        }
-
-        .demo-tab.active {
-            border-bottom-color: #3b82f6;
-            background: #000;
-        }
-
-        /* Stat pulse animation */
-        .stat-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Testimonial styling */
-        .testimonial-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-            border: 1px solid #1a1a1a;
-            border-radius: 16px;
-            padding: 32px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 16px;
-            left: 24px;
-            font-size: 80px;
-            color: #1a1a1a;
-            font-family: Georgia, serif;
-        }
-
-        /* CTA section with gradient */
-        .cta-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #be185d 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-gradient::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem !important;
-            }
-        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .faq-arrow { transition: transform 0.3s ease-in-out; }
+        details[open] .faq-arrow { transform: rotate(180deg); }
     </style>
 </head>
-<body>
-    <!-- Neural network canvas -->
-    <canvas id="neural-canvas"></canvas>
+<body class="antialiased">
 
-    <!-- Minimal header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/5">
+    <div class="site-background"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="mono text-lg font-bold">
-                <span class="text-blue-500">$</span> askantis
-            </div>
-            <nav class="hidden md:flex space-x-8 mono text-sm">
-                <a href="#work" class="text-gray-400 hover:text-white transition-colors">work</a>
-                <a href="#stack" class="text-gray-400 hover:text-white transition-colors">stack</a>
-                <a href="#proof" class="text-gray-400 hover:text-white transition-colors">proof</a>
-                <a href="#start" class="text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition-colors">start_project()</a>
+            <h1 class="text-2xl font-bold tracking-tighter text-white">
+                <a href="#home">[askantis]</a>
+            </h1>
+            <nav id="nav-menu" class="hidden md:flex md:items-center space-x-8">
+                <a href="#services" class="text-slate-300 hover:text-white transition-colors duration-300">Services</a>
+                <a href="#approach" class="text-slate-300 hover:text-white transition-colors duration-300">Approach</a>
+                <a href="#casestudies" class="text-slate-300 hover:text-white transition-colors duration-300">Case Studies</a>
+                <a href="#faq" class="text-slate-300 hover:text-white transition-colors duration-300">FAQ</a>
+                <a href="#contact" class="text-slate-300 hover:text-white transition-colors duration-300">Contact</a>
             </nav>
-            <button id="mobile-menu-btn" class="md:hidden text-white">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                </svg>
-            </button>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none" aria-label="Open navigation menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/50 backdrop-blur-md">
+            <a href="#services" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Services</a>
+            <a href="#approach" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Approach</a>
+            <a href="#casestudies" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Case Studies</a>
+            <a href="#faq" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">FAQ</a>
+            <a href="#contact" class="block py-2 px-6 text-slate-300 hover:bg-gray-800 hover:text-white">Contact</a>
         </div>
     </header>
 
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-8 mono text-2xl">
-            <a href="#work" class="text-gray-400 hover:text-white transition-colors">work</a>
-            <a href="#stack" class="text-gray-400 hover:text-white transition-colors">stack</a>
-            <a href="#proof" class="text-gray-400 hover:text-white transition-colors">proof</a>
-            <a href="#start" class="text-white bg-blue-600 px-6 py-3 rounded">start_project()</a>
-        </div>
-    </div>
-
     <main>
-        <!-- Hero: Bold, direct, confident -->
-        <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-20 relative">
-            <div class="max-w-6xl mx-auto text-center">
-                <div class="mono text-blue-500 text-sm mb-8 tracking-wider">AI_CONSULTANCY_2025</div>
-                <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter leading-none split-text">
-                    <span style="animation-delay: 0.1s">We</span>
-                    <span style="animation-delay: 0.2s"> </span>
-                    <span style="animation-delay: 0.3s">Ship</span>
-                    <span style="animation-delay: 0.4s"> </span>
-                    <span style="animation-delay: 0.5s">AI</span>
+        <!-- Hero Section -->
+        <section id="home" class="h-screen flex flex-col justify-center text-center pt-20">
+            <div class="content-wrapper px-4">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient mb-6" data-aos="fade-down">
+                    Generative AI
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-                    Not decks. Not roadmaps. Not "strategies".<br>
-                    <span class="text-white font-semibold">Production systems that generate revenue.</span>
+                <p class="max-w-3xl mx-auto text-lg text-slate-300" data-aos="fade-up" data-aos-delay="100">
+                    We build custom Generative AI solutions that boost quality and productivity, giving you a decisive competitive edge in the new AI revolution.
                 </p>
-                
-                <!-- Live terminal demo -->
-                <div class="terminal max-w-3xl mx-auto mb-12">
-                    <div class="terminal-header">
-                        <div class="terminal-dot bg-red-500"></div>
-                        <div class="terminal-dot bg-yellow-500"></div>
-                        <div class="terminal-dot bg-green-500"></div>
-                    </div>
-                    <div class="p-6 text-sm text-left">
-                        <div class="mb-2"><span class="text-gray-500">$</span> <span class="text-blue-400">askantis</span> --deploy production</div>
-                        <div class="text-green-400 mb-2">✓ RAG pipeline: 2.3s avg latency</div>
-                        <div class="text-green-400 mb-2">✓ Document processing: 847 docs/hour</div>
-                        <div class="text-green-400 mb-2">✓ Model accuracy: 94.2%</div>
-                        <div class="text-green-400 mb-4">✓ Cost: $0.03/query</div>
-                        <div class="typing-cursor"><span class="text-gray-500">$</span> Ready for next deployment_</div>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mono text-sm">
-                    <a href="#start" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded transition-all transform hover:scale-105">
-                        Schedule Technical Call →
-                    </a>
-                    <a href="#proof" class="px-8 py-4 border border-white/20 hover:border-white/40 rounded transition-all">
-                        View Production Systems ↓
-                    </a>
-                </div>
             </div>
-
-            <div class="scroll-prompt">
-                <div class="w-6 h-10 border-2 border-gray-600 rounded-full p-1">
-                    <div class="w-1 h-2 bg-gray-600 rounded-full mx-auto"></div>
-                </div>
-            </div>
+            <a href="#services" class="scroll-down-arrow absolute bottom-12 left-1/2 -translate-x-1/2 z-10" aria-label="Scroll down">
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+            </a>
         </section>
 
-        <!-- The Problem: What others get wrong -->
-        <section class="py-32 px-6 border-t border-white/5">
-            <div class="max-w-4xl mx-auto">
-                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">THE_PROBLEM</div>
-                <h2 class="text-4xl md:text-6xl font-black mb-12">Most AI consultancies are theatres</h2>
-                
-                <div class="space-y-8 text-lg text-gray-300">
-                    <div class="flex gap-4">
-                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
-                        <div>
-                            <strong class="text-white">Strategy decks</strong> with no implementation path
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
-                        <div>
-                            <strong class="text-white">Proof-of-concepts</strong> that never reach production
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
-                        <div>
-                            <strong class="text-white">"AI transformation"</strong> programmes with zero ROI metrics
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="text-red-500 text-2xl flex-shrink-0">✗</div>
-                        <div>
-                            <strong class="text-white">Vague promises</strong> about efficiency and innovation
-                        </div>
+        <!-- Services Section -->
+        <section id="services" class="py-24 page-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white tracking-tighter" data-aos="fade-up">What We Do</h2>
+                    <div class="max-w-3xl mx-auto">
+                        <p class="text-slate-400 mt-4" data-aos="fade-up" data-aos-delay="100">We cut through the hype, identifying and implementing high-impact AI use-cases tailored to your operations.</p>
+                        <p class="text-slate-300 mt-4 text-lg" data-aos="fade-up" data-aos-delay="200">We apply our expertise in Generative AI to build tailored applications aimed at increasing both the quality and productivity of your business. Our custom solutions, ranging from sophisticated RAG (Retrieval Augmented Generation) systems to hybrid AI automation tools, deliver significant economic impact.</p>
                     </div>
                 </div>
-
-                <div class="mt-16 p-8 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/20 rounded-lg">
-                    <p class="text-xl text-white font-semibold mb-4">We're different.</p>
-                    <p class="text-gray-300">
-                        We're engineers who build production systems. We write code, optimize inference, debug edge cases, and deploy to your infrastructure. No handoffs. No disappearing after the proposal. Just working systems that process real data and generate measurable value.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- What We Actually Do -->
-        <section id="work" class="py-32 px-6 border-t border-white/5">
-            <div class="max-w-6xl mx-auto">
-                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">WHAT_WE_BUILD</div>
-                <h2 class="text-4xl md:text-6xl font-black mb-20">Production-grade AI systems</h2>
-
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- System 1 -->
-                    <div class="lift-card gradient-border p-8">
-                        <div class="mono text-sm text-blue-400 mb-4">[DOCUMENT_INTELLIGENCE]</div>
-                        <h3 class="text-2xl font-bold mb-4">Invoice Processing Pipelines</h3>
-                        <p class="text-gray-400 mb-6">
-                            Vision-language models + OCR + custom classifiers. Extracts structured data from unstructured PDFs. Handles edge cases like handwritten notes, multi-page scans, and foreign languages.
-                        </p>
-                        <div class="mono text-xs text-gray-500 space-y-1">
-                            <div>→ 95%+ autonomous processing</div>
-                            <div>→ 80% time reduction</div>
-                            <div>→ $0.08 per document</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center" data-aos="fade-up">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="file-text" class="w-8 h-8"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Document Processing</h3>
+                        <p class="text-slate-400">Automatically extract, classify, and summarize information from receipts, contracts, and emails to streamline workflows.</p>
                     </div>
-
-                    <!-- System 2 -->
-                    <div class="lift-card gradient-border p-8">
-                        <div class="mono text-sm text-purple-400 mb-4">[RETRIEVAL_SYSTEMS]</div>
-                        <h3 class="text-2xl font-bold mb-4">Enterprise Knowledge RAG</h3>
-                        <p class="text-gray-400 mb-6">
-                            Vector databases with hybrid search. Chunking strategies optimised for your documents. Re-ranking for precision. LLM synthesis with citation tracking. Self-hosted or cloud.
-                        </p>
-                        <div class="mono text-xs text-gray-500 space-y-1">
-                            <div>→ Sub-second retrieval</div>
-                            <div>→ 92% answer accuracy</div>
-                            <div>→ Scales to millions of docs</div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="message-circle" class="w-8 h-8"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Enterprise Knowledge Chat</h3>
+                        <p class="text-slate-400">Access your entire knowledge base—from documents to databases—through a single, intelligent chat interface.</p>
                     </div>
-
-                    <!-- System 3 -->
-                    <div class="lift-card gradient-border p-8">
-                        <div class="mono text-sm text-pink-400 mb-4">[AGENTIC_WORKFLOWS]</div>
-                        <h3 class="text-2xl font-bold mb-4">Multi-Agent Research Systems</h3>
-                        <p class="text-gray-400 mb-6">
-                            LLM agents with tool calling. Web scraping, API integration, data enrichment. Orchestration with validation loops. Human-in-the-loop for critical decisions.
-                        </p>
-                        <div class="mono text-xs text-gray-500 space-y-1">
-                            <div>→ 10x research speed</div>
-                            <div>→ Automated fact-checking</div>
-                            <div>→ Source attribution</div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="bar-chart-2" class="w-8 h-8"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Feedback & Reporting</h3>
+                        <p class="text-slate-400">Analyze vast amounts of feedback to identify trends, topics, and actionable insights for management.</p>
                     </div>
-
-                    <!-- System 4 -->
-                    <div class="lift-card gradient-border p-8">
-                        <div class="mono text-sm text-orange-400 mb-4">[ANALYTICS_AUTOMATION]</div>
-                        <h3 class="text-2xl font-bold mb-4">Automated Reporting Engines</h3>
-                        <p class="text-gray-400 mb-6">
-                            LLMs that analyse time-series data, detect anomalies, and generate natural language insights. Feature engineering pipelines. Customisable output formats.
-                        </p>
-                        <div class="mono text-xs text-gray-500 space-y-1">
-                            <div>→ Daily automated reports</div>
-                            <div>→ Anomaly detection</div>
-                            <div>→ Natural language summaries</div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="headphones" class="w-8 h-8"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-white mb-3">AI Customer Support</h3>
+                        <p class="text-slate-400">Deploy intelligent bots to handle inquiries, resolve common issues, and delegate complex cases to human agents.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Tech Stack: Show the receipts -->
-        <section id="stack" class="py-32 px-6 border-t border-white/5">
-            <div class="max-w-6xl mx-auto">
-                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">TECHNOLOGY_STACK</div>
-                <h2 class="text-4xl md:text-6xl font-black mb-12">Tools we deploy to production</h2>
-
-                <div class="grid md:grid-cols-3 gap-1 bg-white/5 border border-white/5 rounded-lg overflow-hidden mb-12">
-                    <div class="bg-black p-6">
-                        <div class="mono text-xs text-blue-400 mb-3">LLM_PROVIDERS</div>
-                        <div class="space-y-2 text-sm text-gray-300">
-                            <div>• OpenAI GPT-4 / GPT-4o</div>
-                            <div>• Anthropic Claude Sonnet/Opus</div>
-                            <div>• Azure OpenAI</div>
-                            <div>• Open-source (Llama, Mistral)</div>
-                        </div>
-                    </div>
-                    <div class="bg-black p-6">
-                        <div class="mono text-xs text-purple-400 mb-3">VECTOR_DATABASES</div>
-                        <div class="space-y-2 text-sm text-gray-300">
-                            <div>• Pinecone</div>
-                            <div>• Qdrant</div>
-                            <div>• Weaviate</div>
-                            <div>• pgvector (PostgreSQL)</div>
-                        </div>
-                    </div>
-                    <div class="bg-black p-6">
-                        <div class="mono text-xs text-pink-400 mb-3">ORCHESTRATION</div>
-                        <div class="space-y-2 text-sm text-gray-300">
-                            <div>• LangChain / LangGraph</div>
-                            <div>• LlamaIndex</div>
-                            <div>• Custom Python pipelines</div>
-                            <div>• FastAPI / Flask</div>
-                        </div>
-                    </div>
-                    <div class="bg-black p-6">
-                        <div class="mono text-xs text-orange-400 mb-3">INFRASTRUCTURE</div>
-                        <div class="space-y-2 text-sm text-gray-300">
-                            <div>• Docker / Kubernetes</div>
-                            <div>• Azure / AWS / GCP</div>
-                            <div>• On-premise deployment</div>
-                            <div>• CI/CD pipelines</div>
-                        </div>
-                    </div>
-                    <div class="bg-black p-6">
-                        <div class="mono text-xs text-green-400 mb-3">EVALUATION</div>
-                        <div class="space-y-2 text-sm text-gray-300">
-                            <div>• RAGAS framework</div>
-                            <div>• Custom evaluation sets</div>
-                            <div>• A/B testing</div>
-                            <div>• Human eval loops</div>
-                        </div>
-                    </div>
-                    <div class="bg-black p-6">
-                        <div class="mono text-xs text-yellow-400 mb-3">MONITORING</div>
-                        <div class="space-y-2 text-sm text-gray-300">
-                            <div>• LangSmith / Weights & Biases</div>
-                            <div>• Prometheus / Grafana</div>
-                            <div>• Error tracking</div>
-                            <div>• Cost monitoring</div>
-                        </div>
-                    </div>
+        <!-- Approach Section -->
+        <section id="approach" class="py-24 page-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white tracking-tighter" data-aos="fade-up">Our Approach</h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">A structured, value-driven process from idea to enterprise-scale deployment.</p>
                 </div>
-
-                <!-- Code example -->
-                <div class="code-block">
-                    <div class="code-comment"># Example: Production RAG pipeline</div>
-                    <div><span class="code-keyword">from</span> langchain.vectorstores <span class="code-keyword">import</span> Pinecone</div>
-                    <div><span class="code-keyword">from</span> langchain.embeddings <span class="code-keyword">import</span> OpenAIEmbeddings</div>
-                    <div class="mt-4"><span class="code-keyword">def</span> <span class="code-function">query_knowledge_base</span>(query: <span class="code-keyword">str</span>):</div>
-                    <div class="ml-4">vectorstore = Pinecone.from_existing_index(</div>
-                    <div class="ml-8">index_name=<span class="code-string">"enterprise-docs"</span>,</div>
-                    <div class="ml-8">embedding=OpenAIEmbeddings()</div>
-                    <div class="ml-4">)</div>
-                    <div class="ml-4 mt-2">docs = vectorstore.similarity_search(query, k=<span class="code-number">5</span>)</div>
-                    <div class="ml-4">context = <span class="code-string">"\n"</span>.join([d.page_content <span class="code-keyword">for</span> d <span class="code-keyword">in</span> docs])</div>
-                    <div class="ml-4 mt-2"><span class="code-keyword">return</span> generate_response(context, query)</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                           <i data-feather="compass" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">1. Discovery</h3>
+                        <p class="text-slate-400">We help you discover use-cases where AI can significantly enhance your operations.</p>
+                    </div>
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="check-circle" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">2. Proof of Value</h3>
+                        <p class="text-slate-400">We validate the value-add of AI with rapid prototyping and user testing.</p>
+                    </div>
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="layers" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">3. Scale Solution</h3>
+                        <p class="text-slate-400">Once validated, we scale AI solutions and integrate them into your processes.</p>
+                    </div>
+                    <div class="glass-card p-8 text-center transition duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
+                            <i data-feather="shield" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">4. Operate & Support</h3>
+                        <p class="text-slate-400">We ensure seamless functioning of our AI solutions and provide ongoing support.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Proof: Real results -->
-        <section id="proof" class="py-32 px-6 border-t border-white/5">
-            <div class="max-w-7xl mx-auto">
-                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">PRODUCTION_METRICS</div>
-                <h2 class="text-4xl md:text-6xl font-black mb-20">Systems in production</h2>
-
-                <div class="proof-grid rounded-lg overflow-hidden mb-16">
-                    <div class="proof-cell">
-                        <div class="text-5xl font-black mb-2 gradient-text">80%</div>
-                        <div class="text-gray-400 text-sm">Time reduction</div>
-                        <div class="mono text-xs text-gray-600 mt-2">Invoice processing automation</div>
-                    </div>
-                    <div class="proof-cell">
-                        <div class="text-5xl font-black mb-2 gradient-text">95%</div>
-                        <div class="text-gray-400 text-sm">Autonomous rate</div>
-                        <div class="mono text-xs text-gray-600 mt-2">Document classification accuracy</div>
-                    </div>
-                    <div class="proof-cell">
-                        <div class="text-5xl font-black mb-2 gradient-text">2.3s</div>
-                        <div class="text-gray-400 text-sm">Avg latency</div>
-                        <div class="mono text-xs text-gray-600 mt-2">RAG system query response</div>
-                    </div>
-                    <div class="proof-cell">
-                        <div class="text-5xl font-black mb-2 gradient-text">$0.03</div>
-                        <div class="text-gray-400 text-sm">Per query</div>
-                        <div class="mono text-xs text-gray-600 mt-2">Knowledge base search cost</div>
-                    </div>
+        <!-- Case Studies Section with White Background -->
+        <section id="casestudies" class="py-24 bg-white text-gray-800">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 tracking-tighter" data-aos="fade-up">Generative AI: Boosting Quality and Productivity</h2>
+                    <p class="text-blue-600 mt-4 text-2xl font-semibold" data-aos="fade-up" data-aos-delay="100">Featured Generative AI Success Stories</p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
                     <!-- Case Study 1 -->
@@ -581,18 +259,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="space-y-4">
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Challenge</h4>
-                                <p class="text-slate-300">Manual analysis of hundreds of financial KPIs for monthly reports was a complex and time-intensive task for every department.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Solution</h4>
-                                <p class="text-slate-300">Engineered an LLM (GPT-4) to analyze KPIs and write reports matching the style and scope of human-written reports, supported by a data pipeline for cleaning and preprocessing KPI data.</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-sky-400 tracking-wide uppercase text-sm mb-1">Impact</h4>
-                                <p class="text-slate-300">Achieved significant time savings through autonomous report generation. The AI also provides a valuable second perspective, complementing the human point of view for richer insights.</p>
+                    </div>
+                    <!-- Case Study 2 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <img src="./images/Hybrid Document Processing.png" alt="Accounting Automation" class="w-full h-56 object-cover">
+                         <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="font-bold text-gray-900 text-2xl mb-1">Achieving 80% Time Savings in Accounting</h3>
+                            <p class="text-gray-600 mb-6">Revolutionizing document processing with hybrid AI.</p>
+                             <div class="space-y-4 mt-auto">
+                                <p class="text-gray-500 text-sm font-semibold">Client: Fiduciary</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">Accountants had to manually divide large PDF scans into individual invoices, interpret positions, and often perform web research to suggest postings.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">A hybrid AI System (fine-tuned LLM + vision + OCR) was developed that automatically splits documents, classifies them, extracts data into a standardized JSON format, and suggests postings.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">Successful autonomous processing of over 95% of documents, resulting in time savings of 80%.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -617,10 +304,6 @@
                                     <p class="text-gray-700">A shortlist of suitable candidates is generated, complete with a rating (e.g., 76% fulfillment) and analysis of sources (e.g., LinkedIn, Company Website).</p>
                                 </div>
                             </div>
-                            <div class="w-full md:w-1/3 bg-gradient-to-br from-purple-900/20 to-purple-600/20 rounded-lg p-6 flex flex-col justify-center">
-                                <div class="text-4xl font-black mb-2">847</div>
-                                <div class="text-sm text-gray-400">Documents processed per hour</div>
-                            </div>
                         </div>
                     </div>
                      <!-- Case Study 4 -->
@@ -644,321 +327,137 @@
                                     <p class="text-gray-700">Massive time savings, centralized and fast access to knowledge, and the ability to use semantic search rather than simple keyword search.</p>
                                 </div>
                             </div>
-                            <div class="w-full md:w-1/3 bg-gradient-to-br from-pink-900/20 to-pink-600/20 rounded-lg p-6 flex flex-col justify-center">
-                                <div class="text-4xl font-black mb-2">10K+</div>
-                                <div class="text-sm text-gray-400">Legal documents indexed</div>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Capabilities Section -->
+                <div class="mt-24">
+                    <div class="text-center mb-12">
+                         <h3 class="text-3xl font-bold text-gray-900 tracking-tighter" data-aos="fade-up">Generative AI Core Capabilities</h3>
+                         <p class="text-gray-600 mt-4 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">We build tailored Generative AI applications to increase both quality and productivity. Our expertise covers the full spectrum of Gen AI development, from rapid prototyping to production-ready deployments.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Knowledge Retrieval (RAG)</h4>
+                            <p class="text-gray-700">Custom co-pilots and employee chatbots based on Azure AI studio environments or on-premise solutions for highly sensitive data.</p>
+                        </div>
+                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Data Extraction & Imputation</h4>
+                            <p class="text-gray-700">Structuring and interpretation of unstructured data (PDF, PPTX, HTML, etc.). Includes compliance fulfilment checks and purchase controlling.</p>
+                        </div>
+                         <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Custom Application Assistants & Automation</h4>
+                            <p class="text-gray-700">Fully automating data extraction and booking of receipts/credit card statements (Accounting automation).</p>
+                        </div>
+                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Reporting / Output Generation</h4>
+                            <p class="text-gray-700">Automatic generation of management reports based on financial KPIs. Creating first drafts of project proposals. Generating retail product descriptions from image and supplier data.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- How We Work: Clear process -->
-        <section class="py-32 px-6 border-t border-white/5">
-            <div class="max-w-4xl mx-auto">
-                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">METHODOLOGY</div>
-                <h2 class="text-4xl md:text-6xl font-black mb-20">How we work with you</h2>
 
-                <div class="space-y-12">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="mono text-xs text-blue-400 mb-2">WEEK_1-2</div>
-                        <h3 class="text-2xl font-bold mb-3">Discovery & Scoping</h3>
-                        <p class="text-gray-400">
-                            We interview stakeholders, audit your data infrastructure, identify high-ROI use cases. Output: Technical specification + cost estimate + timeline.
-                        </p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="mono text-xs text-purple-400 mb-2">WEEK_3-4</div>
-                        <h3 class="text-2xl font-bold mb-3">Proof of Value</h3>
-                        <p class="text-gray-400">
-                            We build a working prototype on your real data. You test it with actual users. We iterate based on feedback. Go/no-go decision based on metrics.
-                        </p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="mono text-xs text-pink-400 mb-2">WEEK_5-12</div>
-                        <h3 class="text-2xl font-bold mb-3">Production Engineering</h3>
-                        <p class="text-gray-400">
-                            We build the production system: error handling, monitoring, testing, documentation. We integrate with your infrastructure. We set up deployment pipelines.
-                        </p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="mono text-xs text-orange-400 mb-2">ONGOING</div>
-                        <h3 class="text-2xl font-bold mb-3">Support & Optimisation</h3>
-                        <p class="text-gray-400">
-                            We monitor performance, fix issues, optimise costs, update models. Optional: we train your team to maintain the system internally.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- What Makes Us Different -->
-        <section class="py-32 px-6 border-t border-white/5">
-            <div class="max-w-6xl mx-auto">
-                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">DIFFERENTIATION</div>
-                <h2 class="text-4xl md:text-6xl font-black mb-20">Why companies choose us</h2>
-
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="p-8 bg-gradient-to-br from-blue-900/10 to-transparent border border-blue-500/20 rounded-lg">
-                        <div class="text-3xl mb-4">⚡</div>
-                        <h3 class="text-xl font-bold mb-3">Speed to Production</h3>
-                        <p class="text-gray-400">
-                            2-4 week proof of value. No 6-month "strategy phases". If we can't show working code in a month, we don't take the project.
-                        </p>
-                    </div>
-
-                    <div class="p-8 bg-gradient-to-br from-purple-900/10 to-transparent border border-purple-500/20 rounded-lg">
-                        <div class="text-3xl mb-4">🔬</div>
-                        <h3 class="text-xl font-bold mb-3">Technical Depth</h3>
-                        <p class="text-gray-400">
-                            We're engineers, not salespeople. We understand transformers, vector search, fine-tuning, inference optimisation. We read papers. We write code.
-                        </p>
-                    </div>
-
-                    <div class="p-8 bg-gradient-to-br from-pink-900/10 to-transparent border border-pink-500/20 rounded-lg">
-                        <div class="text-3xl mb-4">💰</div>
-                        <h3 class="text-xl font-bold mb-3">Clear Economics</h3>
-                        <p class="text-gray-400">
-                            Fixed-price proof of value. Transparent cost breakdowns. ROI projections based on actual usage. No hidden fees.
-                        </p>
-                    </div>
-
-                    <div class="p-8 bg-gradient-to-br from-orange-900/10 to-transparent border border-orange-500/20 rounded-lg">
-                        <div class="text-3xl mb-4">🛡️</div>
-                        <h3 class="text-xl font-bold mb-3">Security & Compliance</h3>
-                        <p class="text-gray-400">
-                            On-premise deployment options. GDPR compliance. No data used for training. SOC 2 compatible infrastructure. Air-gapped environments possible.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ with straight answers -->
-        <section class="py-32 px-6 border-t border-white/5">
-            <div class="max-w-4xl mx-auto">
-                <div class="mono text-blue-500 text-sm mb-4 tracking-wider">FAQ</div>
-                <h2 class="text-4xl md:text-6xl font-black mb-12">Straight answers</h2>
-
-                <div class="space-y-6">
-                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
-                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
-                            How much does this cost?
-                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
+        <!-- FAQ Section with White Background -->
+        <section id="faq" class="py-24 bg-white border-t border-gray-200 text-gray-800">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-gray-900 tracking-tighter text-center mb-16" data-aos="fade-up">Frequently Asked Questions</h2>
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <details class="faq-item bg-gray-50 border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up">
+                        <summary class="flex justify-between items-center font-semibold text-gray-900 text-lg cursor-pointer">
+                            How do you ensure data privacy and security?
+                            <i data-feather="chevron-down" class="faq-arrow"></i>
                         </summary>
-                        <p class="text-gray-400 mt-4">
-                            Proof of Value: Fixed €8K-15K for 2-4 weeks. Production system: Depends on complexity, typically €30K-80K for 8-12 weeks. Ongoing support: €2K-5K/month or we train your team.
+                        <p class="text-gray-700 mt-4">
+                            We prioritize data security above all else. Our solutions can be deployed on-premise or in your private cloud, ensuring you retain full control over your data. We adhere to strict data protection protocols and can comply with industry-specific regulations like GDPR and HIPAA.
                         </p>
                     </details>
-
-                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
-                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
-                            What if the POV doesn't work?
-                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
+                    <details class="faq-item bg-gray-50 border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <summary class="flex justify-between items-center font-semibold text-gray-900 text-lg cursor-pointer">
+                            What kind of ROI can we expect?
+                            <i data-feather="chevron-down" class="faq-arrow"></i>
                         </summary>
-                        <p class="text-gray-400 mt-4">
-                            You walk away. No obligation to proceed. We're honest about what AI can and can't do. If the metrics don't justify production deployment, we tell you.
+                        <p class="text-gray-700 mt-4">
+                            Return on investment varies by project but is typically measured in productivity gains, cost savings, and quality improvements. For example, automating report generation can save hundreds of hours annually, while AI-powered customer support can reduce overhead and improve customer satisfaction. We work with you to define and track key metrics from the start.
                         </p>
                     </details>
-
-                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
-                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
-                            Do you work with sensitive data?
-                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
+                    <details class="faq-item bg-gray-50 border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <summary class="flex justify-between items-center font-semibold text-gray-900 text-lg cursor-pointer">
+                            How long does a typical project take?
+                            <i data-feather="chevron-down" class="faq-arrow"></i>
                         </summary>
-                        <p class="text-gray-400 mt-4">
-                            Yes. We deploy on-premise or in your private cloud. We use Azure OpenAI (GDPR compliant, data not used for training) or self-hosted open-source models. NDAs standard. SOC 2 processes available.
-                        </p>
-                    </details>
-
-                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
-                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
-                            What industries do you work with?
-                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </summary>
-                        <p class="text-gray-400 mt-4">
-                            Financial services, legal/tax consultancy, manufacturing, logistics, professional services. Any industry with document-heavy processes, knowledge bases, or repetitive analytical work.
-                        </p>
-                    </details>
-
-                    <details class="group p-6 bg-white/5 rounded-lg border border-white/10">
-                        <summary class="cursor-pointer font-semibold text-lg flex justify-between items-center">
-                            Do we need an AI team internally?
-                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </summary>
-                        <p class="text-gray-400 mt-4">
-                            No. We build systems that your existing IT team can maintain, or we provide ongoing support. We document everything and can train your developers if you want to bring it in-house.
+                        <p class="text-gray-700 mt-4">
+                            Our "Proof of Value" phase is designed to be quick, typically taking 2-4 weeks. This allows us to demonstrate tangible results with a functional prototype. A full-scale integration and deployment can range from 2 to 6 months, depending on the complexity and your existing infrastructure.
                         </p>
                     </details>
                 </div>
             </div>
         </section>
 
-        <!-- CTA: Direct and compelling -->
-        <section id="start" class="py-32 px-6 border-t border-white/5 cta-gradient">
-            <div class="max-w-4xl mx-auto text-center relative z-10">
-                <h2 class="text-4xl md:text-6xl font-black mb-6">Let's build something</h2>
-                <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-                    Schedule a 30-minute technical call. We'll audit your use case and tell you honestly if AI can help. No sales pitch, no obligations.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                    <a href="mailto:contact@askantis.ch" class="px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all mono">
-                        contact@askantis.ch
-                    </a>
-                    <div class="text-white/70">or</div>
-                    <a href="https://calendly.com/askantis" class="px-8 py-4 border-2 border-white text-white font-bold rounded hover:bg-white hover:text-black transition-all mono">
-                        Book Technical Call
-                    </a>
-                </div>
-
-                <div class="mono text-sm text-white/60">
-                    Based in Switzerland • Serving Europe & Beyond
+        <!-- Contact Section with Light Gray Background -->
+        <section id="contact" class="py-24 bg-gray-100 text-gray-800">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold text-gray-900 tracking-tighter mb-6">Ready to transform your business with AI?</h2>
+                    <p class="text-xl text-gray-600 mb-10" data-aos="fade-up" data-aos-delay="100">Get in touch with our team to discuss how we can help.</p>
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <a href="mailto:contact@askantis.ch" class="inline-block px-10 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-700 transition duration-300 text-lg">Contact Us</a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Minimal footer -->
-    <footer class="py-8 px-6 border-t border-white/5">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-            <div class="mono mb-4 md:mb-0">© 2025 Askantis</div>
-            <div class="flex gap-6 mono">
-                <a href="mailto:contact@askantis.ch" class="hover:text-white transition-colors">Email</a>
-                <a href="https://linkedin.com/company/askantis" class="hover:text-white transition-colors">LinkedIn</a>
-                <a href="https://github.com/askantis" class="hover:text-white transition-colors">GitHub</a>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; <span id="year"></span> Askantis. All rights reserved.</p>
+            <p class="text-sm mt-2">contact@askantis.ch</p>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <script>
-        // Neural network background animation
-        const canvas = document.getElementById('neural-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        const nodes = [];
-        const nodeCount = 80;
-        const maxDistance = 150;
-
-        for (let i = 0; i < nodeCount; i++) {
-            nodes.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5
-            });
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            nodes.forEach(node => {
-                node.x += node.vx;
-                node.y += node.vy;
-                
-                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
-                
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = '#3b82f6';
-                ctx.fill();
-            });
-            
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < maxDistance) {
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance / maxDistance})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Mobile menu
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu on link click
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Smooth scroll
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    // Also close mobile menu on click
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
 
-        // Animate split text on load
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.split-text span').forEach((span, i) => {
-                span.style.animationDelay = `${i * 0.1}s`;
-            });
+        // Initialize AOS (Animate on Scroll)
+        AOS.init({
+            duration: 800,
+            once: false, 
+            offset: 100
         });
 
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
     </script>
 </body>
 </html>
-
-
-
-
-
 
 
