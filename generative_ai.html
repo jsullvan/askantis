@@ -558,44 +558,72 @@
                         <div class="mono text-xs text-gray-600 mt-2">Knowledge base search cost</div>
                     </div>
                 </div>
-
-                <!-- Case studies with real detail -->
-                <div class="space-y-8">
-                    <!-- Case 1 -->
-                    <div class="gradient-border p-8">
-                        <div class="flex flex-col md:flex-row gap-8">
-                            <div class="flex-1">
-                                <div class="mono text-xs text-blue-400 mb-3">SBB_FINANCIAL_SERVICES</div>
-                                <h3 class="text-2xl font-bold mb-4">Automated KPI Reporting Engine</h3>
-                                <p class="text-gray-400 mb-4">
-                                    Built data pipeline + LLM analysis system. Ingests 100+ financial KPIs, detects trends/anomalies, generates executive summaries in natural language.
-                                </p>
-                                <div class="mono text-sm space-y-2 text-gray-500">
-                                    <div><span class="text-blue-400">Stack:</span> Python, GPT-4, Pandas, Custom ETL</div>
-                                    <div><span class="text-blue-400">Timeline:</span> 3 weeks POV → 8 weeks production</div>
-                                    <div><span class="text-blue-400">Impact:</span> Hours saved per report cycle</div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <!-- Case Study 1 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up">
+                        <img src="./images/Data Transformation Pipeline.png" alt="Financial Reports Automation" class="w-full h-56 object-cover">
+                        <div class="p-8 flex flex-col flex-grow">
+                             <h3 class="font-bold text-gray-900 text-2xl mb-1">Automating Executive Financial Reports</h3>
+                             <p class="text-gray-600 mb-6">Turn complex KPI data into instant, comprehensive reports.</p>
+                             <div class="space-y-4 mt-auto">
+                                 <p class="text-gray-500 text-sm font-semibold">Client: SBB</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">Every department required manual analysis of hundreds of financial KPIs to write a monthly report.</p>
                                 </div>
-                            </div>
-                            <div class="w-full md:w-1/3 bg-gradient-to-br from-blue-900/20 to-blue-600/20 rounded-lg p-6 flex flex-col justify-center">
-                                <div class="text-4xl font-black mb-2">100+</div>
-                                <div class="text-sm text-gray-400">KPIs analysed automatically</div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">We implemented an LLM-based report generation system, powered by a data pipeline and feature engineering, to automatically analyse financial KPIs and generate the executive report.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">Time savings and the generation of additional insights. The client recognized the collaboration as a "transformative experience" in leveraging AI for data analytics.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Case 2 -->
-                    <div class="gradient-border p-8">
-                        <div class="flex flex-col md:flex-row gap-8">
-                            <div class="flex-1">
-                                <div class="mono text-xs text-purple-400 mb-3">FIDUCIARY_ACCOUNTING</div>
-                                <h3 class="text-2xl font-bold mb-4">Hybrid Document Processing System</h3>
-                                <p class="text-gray-400 mb-4">
-                                    Vision LLM + OCR + fine-tuned classifiers. Splits scanned PDFs, extracts invoice data, validates against rules, suggests accounting entries.
-                                </p>
-                                <div class="mono text-sm space-y-2 text-gray-500">
-                                    <div><span class="text-purple-400">Stack:</span> GPT-4V, Tesseract, Custom ML, FastAPI</div>
-                                    <div><span class="text-purple-400">Timeline:</span> 2 weeks POV → 12 weeks production</div>
-                                    <div><span class="text-purple-400">Impact:</span> 80% time reduction, 95% accuracy</div>
+                    <!-- Case Study 2 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <img src="./images/Hybrid Document Processing.png" alt="Accounting Automation" class="w-full h-56 object-cover">
+                         <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="font-bold text-gray-900 text-2xl mb-1">Achieving 80% Time Savings in Accounting</h3>
+                            <p class="text-gray-600 mb-6">Revolutionizing document processing with hybrid AI.</p>
+                             <div class="space-y-4 mt-auto">
+                                <p class="text-gray-500 text-sm font-semibold">Client: Fiduciary</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">Accountants had to manually divide large PDF scans into individual invoices, interpret positions, and often perform web research to suggest postings.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">A hybrid AI System (fine-tuned LLM + vision + OCR) was developed that automatically splits documents, classifies them, extracts data into a standardized JSON format, and suggests postings.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">Successful autonomous processing of over 95% of documents, resulting in time savings of 80%.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Case Study 3 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <img src="./images/Intelligent Profile Matching.png" alt="AI-Powered Recruitment" class="w-full h-56 object-cover">
+                         <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="font-bold text-gray-900 text-2xl mb-1">AI-Powered Candidate Search and Vetting</h3>
+                            <p class="text-gray-600 mb-6">Accelerate recruitment by identifying the perfect fit.</p>
+                             <div class="space-y-4 mt-auto">
+                                <p class="text-gray-500 text-sm font-semibold">Client: Amrop</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">An AI system to support candidate search, efficiently identifying and evaluating candidates against a complex ideal profile.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">Developed an AI system utilizing data enrichment through Webresearch AI. The system evaluates candidates based on the degree of fulfilment against an ideal profile.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">A shortlist of suitable candidates is generated, complete with a rating (e.g., 76% fulfillment) and analysis of sources (e.g., LinkedIn, Company Website).</p>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 bg-gradient-to-br from-purple-900/20 to-purple-600/20 rounded-lg p-6 flex flex-col justify-center">
@@ -604,20 +632,25 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Case 3 -->
-                    <div class="gradient-border p-8">
-                        <div class="flex flex-col md:flex-row gap-8">
-                            <div class="flex-1">
-                                <div class="mono text-xs text-pink-400 mb-3">TAX_CONSULTANCY_LEGAL</div>
-                                <h3 class="text-2xl font-bold mb-4">Enterprise RAG Knowledge System</h3>
-                                <p class="text-gray-400 mb-4">
-                                    Indexed 10,000+ legal documents. Hybrid search (semantic + keyword). LLM synthesis with source citations. Private deployment for sensitive data.
-                                </p>
-                                <div class="mono text-sm space-y-2 text-gray-500">
-                                    <div><span class="text-pink-400">Stack:</span> Qdrant, Claude, Custom embeddings</div>
-                                    <div><span class="text-pink-400">Timeline:</span> 4 weeks POV → 10 weeks production</div>
-                                    <div><span class="text-pink-400">Impact:</span> Instant semantic search, cited answers</div>
+                     <!-- Case Study 4 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                        <img src="./images/Knowledge Centralization and Semantic Search.png" alt="Legal Knowledge Search" class="w-full h-56 object-cover">
+                         <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="font-bold text-gray-900 text-2xl mb-1">Instant Access to Complex Legal Knowledge (RAG)</h3>
+                            <p class="text-gray-600 mb-6">Semantic search instead of keyword hunting.</p>
+                             <div class="space-y-4 mt-auto">
+                                <p class="text-gray-500 text-sm font-semibold">Client: Tax Consultancy</p>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Challenge</h4>
+                                    <p class="text-gray-700">Tax legal knowledge was scattered across many sources (online libraries, internal documents), making search time-consuming.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Solution</h4>
+                                    <p class="text-gray-700">Aggregation of all legal documents into a centralized vector database (RAG solution). An LLM-based chat allows users to query legal information and receive answers to complex questions.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-blue-600 tracking-wide uppercase text-sm mb-1">Impact</h4>
+                                    <p class="text-gray-700">Massive time savings, centralized and fast access to knowledge, and the ability to use semantic search rather than simple keyword search.</p>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 bg-gradient-to-br from-pink-900/20 to-pink-600/20 rounded-lg p-6 flex flex-col justify-center">
@@ -924,3 +957,5 @@
     </script>
 </body>
 </html>
+
+
