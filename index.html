@@ -117,8 +117,13 @@
         }
 
         /* Section Backgrounds and Padding Adjustments */
-        #trusted-by, #testimonials, #about, #contact {
+        #trusted-by, #testimonials, #contact {
             background-color: #f8fafc;
+        }
+        /* Make the About section dark to match the rest of the site */
+        #about {
+            background-color: #0a0a0a;
+            color: #e2e8f0;
         }
 
         /* Animated Gradient for "AI" text */
@@ -223,7 +228,7 @@
                     <h2 class="text-4xl font-bold text-white tracking-tighter" data-aos="fade-up">Our Offer</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                    <a href="generative_ai.html" class="block text-center p-6 rounded-lg hover:bg-slate-800/50 transition-colors duration-300" data-aos="fade-up">
+                    <a href="generative_ai.html" class="block text-center p-6 rounded-lg glass-card transform transition duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-2xl hover:bg-slate-800/50" data-aos="fade-up">
                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
                             <i data-feather="cpu" class="w-8 h-8"></i>
                         </div>
@@ -330,35 +335,40 @@
         <section id="about" class="py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
-                    <h2 class="text-4xl font-bold text-slate-900 tracking-tighter">Who We Are</h2>
-                    <p class="mt-4 text-lg text-slate-600">Askantis was founded in 2023 by three ETH Zurich alumni. Our team consists of mathematicians, physicists, data scientists, software engineers and machine learning experts.</p>
+                    <h2 class="text-4xl font-bold text-white tracking-tighter">Who We Are</h2>
+                    <p class="mt-4 text-lg text-gray-300">Askantis was founded in 2023 by three ETH Zurich alumni. Our team consists of mathematicians, physicists, data scientists, software engineers and machine learning experts.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/oliver_k.avif" alt="Oliver Knapp">
-                        <h4 class="text-xl font-semibold text-slate-900">Oliver Knapp</h4>
-                        <p class="text-sky-600">Co-Founder & Managing Director</p>
+                        <img class="w-32 h-32 md:w-72 md:h-72 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/oliver_k.avif" alt="Oliver Knapp">
+                        <h4 class="text-xl font-semibold text-white">Oliver Knapp</h4>
+                        <p class="text-sky-400">Co-Founder & Managing Director</p>
+                        <p class="text-gray-300 mt-2 mb-3">Oliver received his MSc in Physics from ETH Zurich, with a specialization in quantum information technology and machine learning. Prior to founding Askantis in 2023, he worked as a Software Engineer and Technology Consultant.</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/felix_s.avif" alt="Felix Schur">
-                        <h4 class="text-xl font-semibold text-slate-900">Felix Schur</h4>
-                        <p class="text-sky-600">Co-Founder & Causal Inference Specialist</p>
+                        <img class="w-32 h-32 md:w-72 md:h-72 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/felix_s.avif" alt="Felix Schur">
+                        <h4 class="text-xl font-semibold text-white">Felix Schur</h4>
+                        <p class="text-sky-400">Co-Founder & Causal Inference Specialist</p>
+                        <p class="text-gray-300 mt-2 mb-3">Felix holds a MSc in Mathematics from ETH Zurich and is currently pursuing his PhD in the field of causal inference and machine learning. He was awarded the ETH Medal for his pioneering research on meta reinforcement learning.</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/coline_b.avif" alt="Coline Bretz">
-                        <h4 class="text-xl font-semibold text-slate-900">Coline Bretz</h4>
-                        <p class="text-sky-600">Business Development Lead</p>
+                        <img class="w-32 h-32 md:w-72 md:h-72 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/coline_b.avif" alt="Coline Bretz">
+                        <h4 class="text-xl font-semibold text-white">Coline Bretz</h4>
+                        <p class="text-sky-400">Business Development Lead</p>
+                        <p class="text-gray-300 mt-2 mb-3">Coline brings a PhD in physical chemistry, further education in data science, and over a decade of experience spanning product development, sales, and strategic leadership in high-tech industries. At Askantis, she drives business development by forging partnerships and scaling opportunities.</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="400">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/james_o.avif" alt="James O'Sullivan">
-                        <h4 class="text-xl font-semibold text-slate-900">James O'Sullivan</h4>
-                        <p class="text-sky-600">Senior Technical Consultant</p>
+                        <img class="w-32 h-32 md:w-72 md:h-72 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/james_o.avif" alt="James O'Sullivan">
+                        <h4 class="text-xl font-semibold text-white">James O'Sullivan</h4>
+                        <p class="text-sky-400">Senior Technical Consultant</p>
+                        <p class="text-gray-300 mt-2 mb-3">James O’Sullivan, PhD, is a computational neuroscientist turned industry data scientist with 10+ years of experience delivering end-to-end, production-grade analytics across research and enterprise settings. At F. Hoffman-La Roche, he led a cross-functional research team advancing AI initiatives from concept to deployment, turning complex, real-world data into decisions, products, and value.</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="500">
-                        <img class="w-32 h-32 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/mikel_p.avif" alt="Mikel Prandini">
-                        <h4 class="text-xl font-semibold text-slate-900">Mikel Prandini</h4>
-                        <p class="text-sky-600">Software Engineer</p>
+                        <img class="w-32 h-32 md:w-72 md:h-72 rounded-full mx-auto mb-4 object-cover bg-white" src="https://huggingface.co/spaces/jmsosullivan/askantis/resolve/main/images/employees/mikel_p.avif" alt="Mikel Prandini">
+                        <h4 class="text-xl font-semibold text-white">Mikel Prandini</h4>
+                        <p class="text-sky-400">Software Engineer</p>
+                        <p class="text-gray-300 mt-2 mb-3">Before Mikel joined Askantis, he developed AI and automation solutions in the e-commerce and VTOL drone industry and worked as DevOps Engineer at Swisscom. Mikel possesses extensive expertise in the area of software engineering, full-stack development and DevOps.</p>
                     </div>
                 </div>
             </div>
