@@ -55,6 +55,12 @@
             z-index: 1;
         }
 
+        /* Use a CSS variable for the viewport height to handle mobile browser UI (address bar)
+           --vh is set in JS to window.innerHeight * 0.01 px so 100 * --vh equals the visible viewport. */
+        .full-vh {
+            height: calc(var(--vh, 1vh) * 100);
+        }
+
         /* === Component Styles === */
         .glass-card {
             background: rgba(17, 24, 39, 0.5);
@@ -416,16 +422,29 @@
         });
 
         // --- INITIALIZATIONS ---
-        // Initialize Animate on Scroll (AOS) library for scroll animations.
-        // Use a small offset (0) and refresh AOS so elements already in view
-        // (e.g. the mobile hero subtitle and arrow) animate on initial load.
+        // --- MOBILE VIEWPORT HEIGHT FIX ---
+        // Set a CSS variable --vh that equals 1% of the viewport height. This compensates
+        // for mobile browser UI (address bar / toolbar) so sections sized to 100vh match
+        // the visible area. We set it before initializing AOS so elements already visible
+        // are correctly detected.
+        function setVhCssVar() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVhCssVar();
+        // Update on resize/orientationchange (debounced)
+        let vhTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(vhTimeout);
+            vhTimeout = setTimeout(setVhCssVar, 150);
+        });
+
+        // Initialize AOS after setting viewport CSS variable
         AOS.init({
             duration: 800,
             once: false,
             offset: 0
         });
-        // Immediately refresh AOS to detect elements already in the viewport,
-        // and run another short-timed refresh after first paint to be robust on mobile.
         AOS.refresh();
         setTimeout(() => AOS.refresh(), 150);
 

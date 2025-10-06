@@ -72,6 +72,9 @@
             position: relative;
             z-index: 1;
         }
+        .full-vh {
+            height: calc(var(--vh, 1vh) * 100);
+        }
         .glass-card {
             background: rgba(17, 24, 39, 0.5);
             backdrop-filter: blur(10px);
@@ -413,15 +416,26 @@
             });
         });
 
-        // Initialize AOS (Animate on Scroll)
-        // Use a zero offset and refresh AOS so elements already in view
-        // (e.g. the mobile hero subtitle and arrow) animate on initial load.
+        // --- MOBILE VIEWPORT HEIGHT FIX ---
+        // Set --vh so elements sized to 100vh match the visible viewport on mobile.
+        function setVhCssVar() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVhCssVar();
+        let vhTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(vhTimeout);
+            vhTimeout = setTimeout(setVhCssVar, 150);
+        });
+
+        // Initialize AOS after setting viewport CSS variable so in-view elements
+        // (hero subtitle/arrow) are detected correctly on mobile.
         AOS.init({
             duration: 800,
             once: false, // Allows animations to replay on scroll up/down
             offset: 0
         });
-        // Refresh right away and again shortly after first paint to be robust on mobile.
         AOS.refresh();
         setTimeout(() => AOS.refresh(), 150);
 
