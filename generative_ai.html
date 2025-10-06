@@ -146,7 +146,7 @@
     <!-- Main Content Area -->
     <main>
         <!-- Hero Section: Full-screen intro with title -->
-        <section id="home" class="h-screen flex flex-col justify-center text-center pt-20">
+    <section id="home" class="full-vh flex flex-col justify-center text-center pt-20">
             <div class="content-wrapper px-4">
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient mb-6" data-aos="fade-down">
                     Generative AI
@@ -155,7 +155,7 @@
                     We build custom Generative AI solutions that boost quality and productivity, giving you a decisive competitive edge in the new AI revolution.
                 </p>
             </div>
-            <a href="#services" class="scroll-down-arrow absolute bottom-12 left-1/2 -translate-x-1/2 z-10" aria-label="Scroll down" data-aos="fade-up" data-aos-delay="300">
+            <a href="#services" class="scroll-down-arrow absolute bottom-12 left-0 right-0 flex justify-center z-10" aria-label="Scroll down" data-aos="fade-up" data-aos-delay="300">
                 <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
             </a>
         </section>
@@ -428,7 +428,9 @@
         // the visible area. We set it before initializing AOS so elements already visible
         // are correctly detected.
         function setVhCssVar() {
-            const vh = window.innerHeight * 0.01;
+            // Increase multiplier slightly to ensure the hero fills the visible area
+            // even when mobile browser chrome (address bar / toolbar) is shown.
+            const vh = window.innerHeight * 0.01 * 1.06;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
         setVhCssVar();
