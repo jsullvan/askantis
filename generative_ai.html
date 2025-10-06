@@ -149,7 +149,7 @@
                     We build custom Generative AI solutions that boost quality and productivity, giving you a decisive competitive edge in the new AI revolution.
                 </p>
             </div>
-            <a href="#services" class="scroll-down-arrow absolute bottom-12 left-1/2 -translate-x-1/2 z-10" aria-label="Scroll down">
+            <a href="#services" class="scroll-down-arrow absolute bottom-12 left-1/2 -translate-x-1/2 z-10" aria-label="Scroll down" data-aos="fade-up" data-aos-delay="300">
                 <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
             </a>
         </section>
@@ -417,11 +417,17 @@
 
         // --- INITIALIZATIONS ---
         // Initialize Animate on Scroll (AOS) library for scroll animations.
+        // Use a small offset (0) and refresh AOS so elements already in view
+        // (e.g. the mobile hero subtitle and arrow) animate on initial load.
         AOS.init({
             duration: 800,
-            once: false, 
-            offset: 100
+            once: false,
+            offset: 0
         });
+        // Immediately refresh AOS to detect elements already in the viewport,
+        // and run another short-timed refresh after first paint to be robust on mobile.
+        AOS.refresh();
+        setTimeout(() => AOS.refresh(), 150);
 
         // Initialize Feather Icons to render all `data-feather` attributes as SVG icons.
         feather.replace();
