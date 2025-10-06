@@ -11,11 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* === Base & Layout Styles === */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0a0a;
             color: #e2e8f0;
         }
+
+        /* === Background & Overlay Styles === */
         .site-background {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -42,6 +45,8 @@
             background: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 70%, rgba(10, 10, 10, 1) 100%);
             z-index: 0;
         }
+
+        /* === Page Section & Content Wrapper === */
         .page-section {
             background-color: #0a0a0a;
         }
@@ -49,6 +54,8 @@
             position: relative;
             z-index: 1;
         }
+
+        /* === Component Styles === */
         .glass-card {
             background: rgba(17, 24, 39, 0.5);
             backdrop-filter: blur(10px);
@@ -130,8 +137,9 @@
         </div>
     </header>
 
+    <!-- Main Content Area -->
     <main>
-        <!-- Hero Section -->
+        <!-- Hero Section: Full-screen intro with title -->
         <section id="home" class="h-screen flex flex-col justify-center text-center pt-20">
             <div class="content-wrapper px-4">
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight bg-clip-text text-transparent animated-gradient mb-6" data-aos="fade-down">
@@ -146,7 +154,7 @@
             </a>
         </section>
 
-        <!-- Services Section -->
+        <!-- Services Section (What We Do) -->
         <section id="services" class="py-24 page-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -155,40 +163,33 @@
                         <p class="text-slate-300 mt-4 text-lg" data-aos="fade-up" data-aos-delay="200">We apply our expertise in Generative AI to build tailored applications aimed at increasing both the quality and productivity of your business. Our custom solutions, ranging from sophisticated RAG (Retrieval Augmented Generation) systems to hybrid AI automation tools, deliver significant economic impact.</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     <div class="text-center" data-aos="fade-up">
                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
-                            <i data-feather="file-text" class="w-8 h-8"></i>
+                            <i data-feather="database" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Document Processing</h3>
-                        <p class="text-slate-400">Automatically extract, classify, and summarize information from receipts, contracts, and emails to streamline workflows.</p>
+                        <h3 class="text-xl font-bold text-white mb-3">Knowledge Retrieval (RAG)</h3>
+                        <p class="text-slate-400">Custom co-pilots and chatbots built on your internal documents, databases, and knowledge bases for instant, accurate answers.</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="100">
                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
-                            <i data-feather="message-circle" class="w-8 h-8"></i>
+                            <i data-feather="file-text" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Enterprise Knowledge Chat</h3>
-                        <p class="text-slate-400">Access your entire knowledge base—from documents to databases—through a single, intelligent chat interface.</p>
+                        <h3 class="text-xl font-bold text-white mb-3">Data Extraction & Automation</h3>
+                        <p class="text-slate-400">Structure and interpret unstructured data from PDFs, emails, and images to automate workflows like accounting and compliance checks.</p>
                     </div>
                     <div class="text-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
                             <i data-feather="bar-chart-2" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Feedback & Reporting</h3>
-                        <p class="text-slate-400">Analyze vast amounts of feedback to identify trends, topics, and actionable insights for management.</p>
-                    </div>
-                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon bg-gray-800 text-sky-400 mb-6">
-                            <i data-feather="headphones" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">AI Customer Support</h3>
-                        <p class="text-slate-400">Deploy intelligent bots to handle inquiries, resolve common issues, and delegate complex cases to human agents.</p>
+                        <h3 class="text-xl font-bold text-white mb-3">Reporting & Output Generation</h3>
+                        <p class="text-slate-400">Automatically generate management reports from financial KPIs, create first drafts of proposals, or produce product descriptions from raw data.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Approach Section -->
+        <!-- Approach Section: Our 4-step process -->
         <section id="approach" class="py-24 page-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -228,7 +229,7 @@
             </div>
         </section>
 
-        <!-- Case Studies Section with White Background -->
+        <!-- Case Studies Section -->
         <section id="casestudies" class="py-24 bg-white text-gray-800">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -330,36 +331,11 @@
                     </div>
                 </div>
 
-                <!-- Core Capabilities Section -->
-                <div class="mt-24">
-                    <div class="text-center mb-12">
-                         <h3 class="text-3xl font-bold text-gray-900 tracking-tighter" data-aos="fade-up">Generative AI Core Capabilities</h3>
-                         <p class="text-gray-600 mt-4 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">We build tailored Generative AI applications to increase both quality and productivity. Our expertise covers the full spectrum of Gen AI development, from rapid prototyping to production-ready deployments.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up">
-                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Knowledge Retrieval (RAG)</h4>
-                            <p class="text-gray-700">Custom co-pilots and employee chatbots based on Azure AI studio environments or on-premise solutions for highly sensitive data.</p>
-                        </div>
-                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
-                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Data Extraction & Imputation</h4>
-                            <p class="text-gray-700">Structuring and interpretation of unstructured data (PDF, PPTX, HTML, etc.). Includes compliance fulfilment checks and purchase controlling.</p>
-                        </div>
-                         <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
-                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Custom Application Assistants & Automation</h4>
-                            <p class="text-gray-700">Fully automating data extraction and booking of receipts/credit card statements (Accounting automation).</p>
-                        </div>
-                        <div class="capability-card bg-white border border-gray-200 p-6 rounded-lg transition duration-300" data-aos="fade-up" data-aos-delay="300">
-                            <h4 class="font-semibold text-xl text-gray-900 mb-2">Reporting / Output Generation</h4>
-                            <p class="text-gray-700">Automatic generation of management reports based on financial KPIs. Creating first drafts of project proposals. Generating retail product descriptions from image and supplier data.</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
 
-        <!-- FAQ Section with White Background -->
+        <!-- FAQ Section -->
         <section id="faq" class="py-24 bg-white border-t border-gray-200 text-gray-800">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-gray-900 tracking-tighter text-center mb-16" data-aos="fade-up">Frequently Asked Questions</h2>
@@ -395,7 +371,7 @@
             </div>
         </section>
 
-        <!-- Contact Section with Light Gray Background -->
+        <!-- Contact Section -->
         <section id="contact" class="py-24 bg-gray-100 text-gray-800">
             <div class="container mx-auto px-6">
                 <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
@@ -409,8 +385,8 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200">
+    <!-- Footer Section -->
+    <footer class="bg-white border-t border-gray-200 text-gray-800">
         <div class="container mx-auto px-6 py-8 text-center text-gray-500">
             <p>&copy; <span id="year"></span> Askantis. All rights reserved.</p>
             <p class="text-sm mt-2">contact@askantis.ch</p>
@@ -420,10 +396,12 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
-        // Set current year in footer
+        // --- FOOTER ---
+        // Dynamically set the current year in the footer copyright.
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Smooth scrolling for navigation links
+        // --- NAVIGATION ---
+        // Handles smooth scrolling for all anchor links pointing to an ID.
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -438,20 +416,22 @@
             });
         });
 
-        // Initialize AOS (Animate on Scroll)
+        // --- INITIALIZATIONS ---
+        // Initialize Animate on Scroll (AOS) library for scroll animations.
         AOS.init({
             duration: 800,
             once: false, 
             offset: 100
         });
 
-        // Initialize Feather Icons
+        // Initialize Feather Icons to render all `data-feather` attributes as SVG icons.
         feather.replace();
 
-        // Mobile menu toggle
+        // --- UI INTERACTIONS ---
+        // Toggles the visibility of the mobile navigation menu.
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
+
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
