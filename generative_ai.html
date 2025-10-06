@@ -55,10 +55,10 @@
             z-index: 1;
         }
 
-        /* Use a CSS variable for the viewport height to handle mobile browser UI (address bar)
-           --vh is set in JS to window.innerHeight * 0.01 px so 100 * --vh equals the visible viewport. */
+        /* Use dynamic viewport height to prevent jumps on mobile */
         .full-vh {
-            height: calc(var(--vh, 1vh) * 100);
+            height: 100vh; /* Fallback for older browsers */
+            height: 100dvh;
         }
 
         /* === Component Styles === */
@@ -244,7 +244,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
                     <!-- Case Study 1 -->
                     <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up">
-                        <img src="./images/case_studies/Data_Transformation_Pipeline.png" alt="Financial Reports Automation" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/600x400/0a0a0a/e2e8f0?text=Financial+Reports" alt="Financial Reports Automation" class="w-full h-56 object-cover">
                         <div class="p-8 flex flex-col flex-grow">
                              <h3 class="font-bold text-gray-900 text-2xl mb-1">Automating Executive Financial Reports</h3>
                              <p class="text-gray-600 mb-6">Turn complex KPI data into instant, comprehensive reports.</p>
@@ -267,7 +267,7 @@
                     </div>
                     <!-- Case Study 2 -->
                     <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="100">
-                        <img src="./images/case_studies/Hybrid_Document_Processing.png" alt="Accounting Automation" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/600x400/0a0a0a/e2e8f0?text=Document+Processing" alt="Accounting Automation" class="w-full h-56 object-cover">
                          <div class="p-8 flex flex-col flex-grow">
                             <h3 class="font-bold text-gray-900 text-2xl mb-1">Achieving 80% Time Savings in Accounting</h3>
                             <p class="text-gray-600 mb-6">Revolutionizing document processing with hybrid AI.</p>
@@ -290,7 +290,7 @@
                     </div>
                      <!-- Case Study 3 -->
                     <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="200">
-                        <img src="./images/case_studies/Intelligent_Profile_Matching.png" alt="AI-Powered Recruitment" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/600x400/0a0a0a/e2e8f0?text=Profile+Matching" alt="AI-Powered Recruitment" class="w-full h-56 object-cover">
                          <div class="p-8 flex flex-col flex-grow">
                             <h3 class="font-bold text-gray-900 text-2xl mb-1">AI-Powered Candidate Search and Vetting</h3>
                             <p class="text-gray-600 mb-6">Accelerate recruitment by identifying the perfect fit.</p>
@@ -313,7 +313,7 @@
                     </div>
                      <!-- Case Study 4 -->
                     <div class="testimonial-card bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col" data-aos="fade-up" data-aos-delay="300">
-                        <img src="./images/case_studies/Knowledge_Centralization_and_Semantic_Search.png" alt="Legal Knowledge Search" class="w-full h-56 object-cover">
+                        <img src="https://placehold.co/600x400/0a0a0a/e2e8f0?text=Knowledge+Search" alt="Legal Knowledge Search" class="w-full h-56 object-cover">
                          <div class="p-8 flex flex-col flex-grow">
                             <h3 class="font-bold text-gray-900 text-2xl mb-1">Instant Access to Complex Legal Knowledge (RAG)</h3>
                             <p class="text-gray-600 mb-6">Semantic search instead of keyword hunting.</p>
@@ -421,34 +421,12 @@
             });
         });
 
-        // --- INITIALIZATIONS ---
-        // --- MOBILE VIEWPORT HEIGHT FIX ---
-        // Set a CSS variable --vh that equals 1% of the viewport height. This compensates
-        // for mobile browser UI (address bar / toolbar) so sections sized to 100vh match
-        // the visible area. We set it before initializing AOS so elements already visible
-        // are correctly detected.
-        function setVhCssVar() {
-            // Increase multiplier slightly to ensure the hero fills the visible area
-            // even when mobile browser chrome (address bar / toolbar) is shown.
-            const vh = window.innerHeight * 0.01 * 1.06;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        setVhCssVar();
-        // Update on resize/orientationchange (debounced)
-        let vhTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(vhTimeout);
-            vhTimeout = setTimeout(setVhCssVar, 150);
-        });
-
-        // Initialize AOS after setting viewport CSS variable
+        // Initialize AOS 
         AOS.init({
             duration: 800,
             once: false,
             offset: 0
         });
-        AOS.refresh();
-        setTimeout(() => AOS.refresh(), 150);
 
         // Initialize Feather Icons to render all `data-feather` attributes as SVG icons.
         feather.replace();
